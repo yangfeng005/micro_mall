@@ -18,17 +18,28 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.1</version>
+            <configuration>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+            </configuration>
+        </plugin>
+        <!-- 应用基础代码生成 -->
+        <plugin>
+            <groupId>com.jp</groupId>
+            <artifactId>maven-gen-plugin</artifactId>
+            <version>0.1.1</version>
+            <configuration>
+                <appObjectPackage>com.mall.shop.entity.customized</appObjectPackage>
+                <entityPackage>com.mall.shop.entity.gen</entityPackage>
+                <mapperPackage>com.mall.shop.dao.gen.mysql</mapperPackage>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 </project>

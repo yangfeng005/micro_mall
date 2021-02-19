@@ -13,7 +13,16 @@
     <name>mall-web</name>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.mall.shop</groupId>
+            <artifactId>mall-shop</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mall.wx</groupId>
+            <artifactId>mall-wx</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>backstage</finalName>
