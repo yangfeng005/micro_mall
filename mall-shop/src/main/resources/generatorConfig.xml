@@ -56,11 +56,14 @@
 
 
 
-        <table tableName="specification" domainObjectName="Specification">
+        <table tableName="category" domainObjectName="Category">
             <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
             <columnOverride column="ID" property="id" javaType="String" />
         </table>
-
+        <table tableName="brand" domainObjectName="Brand">
+            <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
+            <columnOverride column="ID" property="id" javaType="String" />
+        </table>
 
 
     </context>
