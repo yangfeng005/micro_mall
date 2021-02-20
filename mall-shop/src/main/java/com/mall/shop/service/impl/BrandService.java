@@ -9,7 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.mall.shop.dao.gen.BrandGeneratedMapper;
 import com.mall.shop.entity.customized.BrandAO;
 import com.mall.shop.entity.gen.BrandCriteria;
-import com.mall.shop.request.BrandRequest;
+import com.mall.shop.dto.request.BrandRequest;
 import com.mall.shop.service.IBrandService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

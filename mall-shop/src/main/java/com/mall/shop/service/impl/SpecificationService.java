@@ -9,7 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.mall.shop.dao.gen.SpecificationGeneratedMapper;
 import com.mall.shop.entity.customized.SpecificationAO;
 import com.mall.shop.entity.gen.SpecificationCriteria;
-import com.mall.shop.request.SpecificationRequest;
+import com.mall.shop.dto.request.SpecificationRequest;
 import com.mall.shop.service.ISpecificationService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

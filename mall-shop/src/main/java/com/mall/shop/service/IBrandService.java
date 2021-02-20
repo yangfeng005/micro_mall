@@ -4,7 +4,7 @@ import com.backstage.core.result.ServiceResult;
 import com.backstage.core.service.IBaseAOService;
 import com.mall.shop.entity.customized.BrandAO;
 import com.mall.shop.entity.gen.BrandCriteria;
-import com.mall.shop.request.BrandRequest;
+import com.mall.shop.dto.request.BrandRequest;
 
 import java.util.List;
 

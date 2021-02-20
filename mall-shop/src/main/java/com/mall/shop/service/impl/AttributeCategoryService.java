@@ -9,7 +9,7 @@ import com.github.pagehelper.PageInfo;
 import com.mall.shop.dao.gen.AttributeCategoryGeneratedMapper;
 import com.mall.shop.entity.customized.AttributeCategoryAO;
 import com.mall.shop.entity.gen.AttributeCategoryCriteria;
-import com.mall.shop.request.AttributeCategoryRequest;
+import com.mall.shop.dto.request.AttributeCategoryRequest;
 import com.mall.shop.service.IAttributeCategoryService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;

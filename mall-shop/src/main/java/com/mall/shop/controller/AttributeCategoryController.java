@@ -4,7 +4,7 @@ package com.mall.shop.controller;
 import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.system.log.LogOperation;
 import com.mall.shop.entity.customized.AttributeCategoryAO;
-import com.mall.shop.request.AttributeCategoryRequest;
+import com.mall.shop.dto.request.AttributeCategoryRequest;
 import com.mall.shop.service.IAttributeCategoryService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

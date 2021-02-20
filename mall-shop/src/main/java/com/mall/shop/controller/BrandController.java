@@ -4,7 +4,7 @@ package com.mall.shop.controller;
 import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.system.log.LogOperation;
 import com.mall.shop.entity.customized.BrandAO;
-import com.mall.shop.request.BrandRequest;
+import com.mall.shop.dto.request.BrandRequest;
 import com.mall.shop.service.IBrandService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

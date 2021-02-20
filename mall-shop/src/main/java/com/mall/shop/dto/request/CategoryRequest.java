@@ -1,4 +1,4 @@
-package com.mall.shop.request;
+package com.mall.shop.dto.request;
 
 
 import com.backstage.core.request.BaseRequest;
@@ -10,7 +10,13 @@ import java.io.Serializable;
 public class CategoryRequest extends BaseRequest implements Serializable {
 
     /**
-     * 规格名称
+     * 名称
      */
     private String name;
+
+
+    /**
+     * 编码
+     */
+    private String code;
 }
