@@ -99,4 +99,15 @@ public class AttributeCategoryController {
         return attributeCategoryService.deleteById(id);
     }
 
+    /**
+     * 查询所有商品属性种类
+     *
+     * @return
+     */
+    @PostMapping(value = "/attributeCategory/listAll")
+    @RequiresPermissions(value = {"attributeCategory:view", "attributeCategory:manage"}, logical = Logical.OR)
+    @LogOperation(action = "查询所有商品属性种类")
+    public Object listAll() {
+        return attributeCategoryService.listAll();
+    }
 }

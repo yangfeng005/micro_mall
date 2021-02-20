@@ -12,4 +12,6 @@ public interface IAttributeCategoryService extends IBaseAOService<AttributeCateg
 
     ServiceResult<List<AttributeCategoryAO>> list(AttributeCategoryRequest request);
 
+    ServiceResult<List<AttributeCategoryAO>> listAll();
+
 }

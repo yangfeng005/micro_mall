@@ -3,6 +3,7 @@ package com.mall.shop.service.impl;
 import com.backstage.common.page.Page;
 import com.backstage.core.mapper.BaseGeneratedMapper;
 import com.backstage.core.result.ServiceResult;
+import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.core.service.AbstractBaseAOService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 商品属性种类服务
@@ -56,11 +58,15 @@ public class AttributeCategoryService extends AbstractBaseAOService<AttributeCat
     public List<AttributeCategoryAO> listByCondition(AttributeCategoryRequest request) {
         AttributeCategoryCriteria criteria = new AttributeCategoryCriteria();
         AttributeCategoryCriteria.Criteria c = criteria.createCriteria();
-        if (StringUtils.isNotBlank(request.getName())) {
+        if (!Objects.isNull(request) && StringUtils.isNotBlank(request.getName())) {
             c.andNameLike("%" + request.getName() + "%");
         }
         return selectByCriteria(criteria).getData();
     }
 
+    @Override
+    public ServiceResult<List<AttributeCategoryAO>> listAll() {
+        return ServiceResultHelper.genResultWithSuccess(listByCondition(null));
+    }
 }
 

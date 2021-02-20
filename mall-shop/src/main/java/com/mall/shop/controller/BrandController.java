@@ -3,8 +3,8 @@ package com.mall.shop.controller;
 
 import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.system.log.LogOperation;
-import com.mall.shop.entity.customized.BrandAO;
 import com.mall.shop.dto.request.BrandRequest;
+import com.mall.shop.entity.customized.BrandAO;
 import com.mall.shop.service.IBrandService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -99,4 +99,16 @@ public class BrandController {
         return brandService.deleteById(id);
     }
 
+
+    /**
+     * 查询所有品牌制造商
+     *
+     * @return
+     */
+    @PostMapping(value = "/brand/listAll")
+    @RequiresPermissions(value = {"brand:view", "brand:manage"}, logical = Logical.OR)
+    @LogOperation(action = "查询所有品牌制造商")
+    public Object list() {
+        return brandService.listAll();
+    }
 }

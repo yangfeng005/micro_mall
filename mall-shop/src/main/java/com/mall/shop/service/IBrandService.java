@@ -12,4 +12,5 @@ public interface IBrandService extends IBaseAOService<BrandAO, BrandCriteria> {
 
     ServiceResult<List<BrandAO>> list(BrandRequest request);
 
+    ServiceResult<List<BrandAO>> listAll();
 }
