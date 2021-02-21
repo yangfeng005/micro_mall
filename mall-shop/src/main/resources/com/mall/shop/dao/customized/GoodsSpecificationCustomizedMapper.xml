@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity Goods.
+                 Generated at 2021-02-20 16:00:02, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 20, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.GoodsSpecificationCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.GoodsSpecificationAO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="specification_id" property="specificationId" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.GoodsSpecificationRequest"
+          resultMap="CustomResultMap">
+    SELECT
+          gs.*,
+          s.name as specificationName,
+          g.name as productName
+    FROM
+          goods_specification gs
+    LEFT JOIN specification s ON gs.specification_id = s.id
+    LEFT JOIN goods g ON gs.goods_id = g.id
+    <where>
+        <if test="productName != null and productName != ''">
+           g.name LIKE CONCAT('%', #{productName, jdbcType=VARCHAR},'%')
+        </if>
+    </where>
+  </select>
+
+</mapper>

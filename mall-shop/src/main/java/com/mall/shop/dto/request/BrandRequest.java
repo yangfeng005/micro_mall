@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class BrandRequest extends BaseRequest implements Serializable {
 
     /**
-     * 规格名称
+     * 名称
      */
     private String name;
 }
