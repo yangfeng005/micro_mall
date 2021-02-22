@@ -3,6 +3,7 @@ package com.mall.shop.service.impl;
 import com.backstage.common.page.Page;
 import com.backstage.core.mapper.BaseGeneratedMapper;
 import com.backstage.core.result.ServiceResult;
+import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.core.service.AbstractBaseAOService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -55,5 +56,17 @@ public class GoodsSpecificationService extends AbstractBaseAOService<GoodsSpecif
     }
 
 
+    /**
+     * 根据商品id获取规格
+     *
+     * @param goodsId
+     * @return
+     */
+    @Override
+    public ServiceResult<List<GoodsSpecificationAO>> getSpecificationByGoodsId(String goodsId) {
+        GoodsSpecificationRequest request = new GoodsSpecificationRequest();
+        request.setGoodsId(goodsId);
+        return ServiceResultHelper.genResultWithSuccess(goodsSpecificationCustomizedMapper.listByCondition(request));
+    }
 }
 

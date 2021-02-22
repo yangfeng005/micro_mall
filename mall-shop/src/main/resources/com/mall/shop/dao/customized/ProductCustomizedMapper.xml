@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity Product.
+                 Generated at 2021-02-22 10:36:23, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 22, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.ProductCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.ProductAO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
+    <result column="goods_number" property="goodsNumber" jdbcType="VARCHAR" />
+    <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
+    <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
+    <result column="goods_specification_ids" property="goodsSpecificationIds" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.ProductRequest"
+          resultMap="CustomResultMap">
+    SELECT
+        p.*,
+        g.name as productName
+    FROM
+        product p
+    LEFT JOIN goods g ON p.goods_id = g.id
+    <where>
+        <if test="productName != null and productName != ''">
+          g.name LIKE CONCAT('%', #{productName, jdbcType=VARCHAR},'%')
+        </if>
+    </where>
+  </select>
+</mapper>

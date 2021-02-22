@@ -12,4 +12,13 @@ public interface IGoodsSpecificationService extends IBaseAOService<GoodsSpecific
 
     ServiceResult<List<GoodsSpecificationAO>> list(GoodsSpecificationRequest request);
 
+
+    /**
+     * 根据商品id获取规格
+     *
+     * @param goodsId
+     * @return
+     */
+    ServiceResult<List<GoodsSpecificationAO>> getSpecificationByGoodsId(String goodsId);
+
 }

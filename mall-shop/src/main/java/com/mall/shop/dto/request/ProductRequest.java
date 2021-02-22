@@ -7,15 +7,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class GoodsSpecificationRequest extends BaseRequest implements Serializable {
+public class ProductRequest extends BaseRequest implements Serializable {
 
     /**
      * 商品名称
      */
     private String productName;
-
-    /**
-     * 商品id
-     */
-    private String goodsId;
 }
