@@ -32,5 +32,6 @@
           g.name LIKE CONCAT('%', #{productName, jdbcType=VARCHAR},'%')
         </if>
     </where>
+    ORDER BY p.goods_id desc
   </select>
 </mapper>
