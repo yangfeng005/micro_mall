@@ -77,12 +77,15 @@ public class ProductService extends AbstractBaseAOService<ProductAO, ProductCrit
                 if (!StringUtils.isEmpty(o.getGoodsSpecificationIds())) {
                     String[] goodsSpecificationIds = o.getGoodsSpecificationIds().split("_");
                     if (!Objects.isNull(goodsSpecificationIds) && goodsSpecificationIds.length > 0) {
-                        List specificationIds = new ArrayList();
+                        List<String> specificationIds = new ArrayList();
+                        List<String> goodsSpecificationNames = new ArrayList();
                         for (String id : goodsSpecificationIds) {
-                            specificationIds.add(goodsSpecificationService.selectByPrimaryKey(id).getData()
-                                    .getSpecificationId());
+                            GoodsSpecificationAO goodsSpecification = goodsSpecificationService.selectByPrimaryKey(id).getData();
+                            specificationIds.add(goodsSpecification.getSpecificationId());
+                            goodsSpecificationNames.add(goodsSpecification.getValue());
                         }
                         o.setGoodsSpecificationIdList(specificationIds);
+                        o.setGoodsSpecificationName(String.join("|", goodsSpecificationNames));
                     }
                 }
             });

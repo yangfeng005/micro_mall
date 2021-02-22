@@ -42,6 +42,19 @@ public final class ProductAO extends Product implements Serializable {
      */
     private List<String> goodsSpecificationIdList;
 
+    /**
+     * 商品规格名称
+     */
+    private String goodsSpecificationName;
+
+
+    public String getGoodsSpecificationName() {
+        return goodsSpecificationName;
+    }
+
+    public void setGoodsSpecificationName(String goodsSpecificationName) {
+        this.goodsSpecificationName = goodsSpecificationName;
+    }
 
     public Map<String, List<GoodsSpecificationAO>> getSpecificationMap() {
         return specificationMap;
