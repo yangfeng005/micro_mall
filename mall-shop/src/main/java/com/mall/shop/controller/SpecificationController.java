@@ -3,8 +3,8 @@ package com.mall.shop.controller;
 
 import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.system.log.LogOperation;
-import com.mall.shop.entity.customized.SpecificationAO;
 import com.mall.shop.dto.request.SpecificationRequest;
+import com.mall.shop.entity.customized.SpecificationAO;
 import com.mall.shop.service.ISpecificationService;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -97,6 +97,18 @@ public class SpecificationController {
             return ServiceResultHelper.genResultWithFaild("主键为空", -1);
         }
         return specificationService.deleteById(id);
+    }
+
+    /**
+     * 查询所有规格
+     *
+     * @return
+     */
+    @PostMapping(value = "/specification/listAll")
+    @RequiresPermissions(value = {"specification:view", "specification:manage"}, logical = Logical.OR)
+    @LogOperation(action = "查询所有规格")
+    public Object listAll(SpecificationRequest request) {
+        return specificationService.listAll(request);
     }
 
 }

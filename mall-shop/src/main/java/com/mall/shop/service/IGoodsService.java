@@ -12,4 +12,6 @@ public interface IGoodsService extends IBaseAOService<GoodsAO, GoodsCriteria> {
 
     ServiceResult<List<GoodsAO>> list(GoodsRequest request);
 
+    ServiceResult<List<GoodsAO>> listAll(GoodsRequest request);
+
 }

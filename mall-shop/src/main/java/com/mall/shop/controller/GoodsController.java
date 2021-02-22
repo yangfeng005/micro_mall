@@ -99,4 +99,16 @@ public class GoodsController {
         return goodsService.deleteById(id);
     }
 
+    /**
+     * 查询所有商品
+     *
+     * @return
+     */
+    @PostMapping(value = "/goods/listAll")
+    @RequiresPermissions(value = {"goods:view", "goods:manage"}, logical = Logical.OR)
+    @LogOperation(action = "查询所有商品")
+    public Object listAll(GoodsRequest request) {
+        return goodsService.listAll(request);
+    }
+
 }

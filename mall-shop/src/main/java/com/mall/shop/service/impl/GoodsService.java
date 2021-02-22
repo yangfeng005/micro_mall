@@ -3,6 +3,7 @@ package com.mall.shop.service.impl;
 import com.backstage.common.page.Page;
 import com.backstage.core.mapper.BaseGeneratedMapper;
 import com.backstage.core.result.ServiceResult;
+import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.core.service.AbstractBaseAOService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -54,6 +55,11 @@ public class GoodsService extends AbstractBaseAOService<GoodsAO, GoodsCriteria> 
         return ret;
     }
 
+
+    @Override
+    public ServiceResult<List<GoodsAO>> listAll(GoodsRequest request) {
+        return ServiceResultHelper.genResultWithSuccess(goodsCustomizedMapper.listByCondition(request));
+    }
 
 }
 
