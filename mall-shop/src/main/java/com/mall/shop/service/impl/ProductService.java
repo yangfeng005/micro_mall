@@ -19,10 +19,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -74,15 +71,24 @@ public class ProductService extends AbstractBaseAOService<ProductAO, ProductCrit
                 List<GoodsSpecificationAO> data = goodsSpecificationService
                         .getSpecificationByGoodsId(o.getGoodsId()).getData();
                 Map<String, List<GoodsSpecificationAO>> specificationMap = data.stream()
-                        .collect(Collectors.groupingBy(GoodsSpecificationAO::getSpecificationName,
+                        .collect(Collectors.groupingBy(GoodsSpecificationAO::getSpecificationId,
                                 LinkedHashMap::new, Collectors.toList()));
                 o.setSpecificationMap(specificationMap);
-                if(!StringUtils.isEmpty(o.getGoodsSpecificationIds())){
-                    o.setGoodsSpecificationIdList(Arrays.asList(o.getGoodsSpecificationIds().split("_")));
+                if (!StringUtils.isEmpty(o.getGoodsSpecificationIds())) {
+                    String[] goodsSpecificationIds = o.getGoodsSpecificationIds().split("_");
+                    if (!Objects.isNull(goodsSpecificationIds) && goodsSpecificationIds.length > 0) {
+                        List specificationIds = new ArrayList();
+                        for (String id : goodsSpecificationIds) {
+                            specificationIds.add(goodsSpecificationService.selectByPrimaryKey(id).getData()
+                                    .getSpecificationId());
+                        }
+                        o.setGoodsSpecificationIdList(specificationIds);
+                    }
                 }
             });
         }
     }
 
 }
+
 
