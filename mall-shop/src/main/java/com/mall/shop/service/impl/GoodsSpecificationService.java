@@ -16,7 +16,10 @@ import com.mall.shop.service.IGoodsSpecificationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 商品规格服务
@@ -67,6 +70,22 @@ public class GoodsSpecificationService extends AbstractBaseAOService<GoodsSpecif
         GoodsSpecificationRequest request = new GoodsSpecificationRequest();
         request.setGoodsId(goodsId);
         return ServiceResultHelper.genResultWithSuccess(goodsSpecificationCustomizedMapper.listByCondition(request));
+    }
+
+
+    /**
+     * 根据商品id获取规格map
+     *
+     * @param goodsId
+     * @return
+     */
+    @Override
+    public ServiceResult<Map<String, List<GoodsSpecificationAO>>> listGoodsSpecification(String goodsId) {
+        List<GoodsSpecificationAO> data = getSpecificationByGoodsId(goodsId).getData();
+        Map<String, List<GoodsSpecificationAO>> specificationMap = data.stream()
+                .collect(Collectors.groupingBy(GoodsSpecificationAO::getSpecificationId,
+                        LinkedHashMap::new, Collectors.toList()));
+        return ServiceResultHelper.genResultWithSuccess(specificationMap);
     }
 }
 

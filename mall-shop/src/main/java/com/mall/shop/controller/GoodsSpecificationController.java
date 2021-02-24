@@ -92,11 +92,20 @@ public class GoodsSpecificationController {
     @DeleteMapping(value = "/goodsSpecification/{id}")
     @RequiresPermissions("goodsSpecification:manage")
     @LogOperation(action = "删除商品规格")
-    public Object deleteById(@PathVariable("id") String id) {
-        if (StringUtils.isEmpty(id)) {
-            return ServiceResultHelper.genResultWithFaild("主键为空", -1);
-        }
+    public Object deleteById(@PathVariable("id") @RequestParam String id) {
         return goodsSpecificationService.deleteById(id);
     }
 
+
+    /**
+     * 根据商品id获取规格map
+     *
+     * @param goodsId
+     * @return
+     */
+    @PostMapping(value = "/goodsSpecification/listGoodsSpecification")
+    @LogOperation(action = "根据商品id获取规格map")
+    public Object listGoodsSpecification(@RequestParam String goodsId) {
+        return goodsSpecificationService.listGoodsSpecification(goodsId);
+    }
 }

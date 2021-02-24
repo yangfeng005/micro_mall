@@ -19,8 +19,9 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 产品服务
@@ -57,41 +58,38 @@ public class ProductService extends AbstractBaseAOService<ProductAO, ProductCrit
         ServiceResult<List<ProductAO>> ret = new ServiceResult();
         PageHelper.startPage(request.getPageNo(), request.getPageSize());
         List<ProductAO> productList = productCustomizedMapper.listByCondition(request);
-        //设置商品规格
-        setGoodsSpecification(productList);
+        if (!CollectionUtils.isEmpty(productList)) {
+            productList.stream().forEach(o -> setGoodsSpecification(o));
+        }
         ret.setData(productList);
         ret.setSucceed(true);
         ret.setAdditionalProperties("page", Page.obtainPage(new PageInfo(productList)));
         return ret;
     }
 
-    public void setGoodsSpecification(List<ProductAO> productList) {
-        if (!CollectionUtils.isEmpty(productList)) {
-            productList.stream().forEach(o -> {
-                List<GoodsSpecificationAO> data = goodsSpecificationService
-                        .getSpecificationByGoodsId(o.getGoodsId()).getData();
-                Map<String, List<GoodsSpecificationAO>> specificationMap = data.stream()
-                        .collect(Collectors.groupingBy(GoodsSpecificationAO::getSpecificationId,
-                                LinkedHashMap::new, Collectors.toList()));
-                o.setSpecificationMap(specificationMap);
-                if (!StringUtils.isEmpty(o.getGoodsSpecificationIds())) {
-                    String[] goodsSpecificationIds = o.getGoodsSpecificationIds().split("_");
-                    if (!Objects.isNull(goodsSpecificationIds) && goodsSpecificationIds.length > 0) {
-                        List<String> specificationIds = new ArrayList();
-                        List<String> goodsSpecificationNames = new ArrayList();
-                        for (String id : goodsSpecificationIds) {
-                            GoodsSpecificationAO goodsSpecification = goodsSpecificationService.selectByPrimaryKey(id).getData();
-                            specificationIds.add(goodsSpecification.getSpecificationId());
-                            goodsSpecificationNames.add(goodsSpecification.getValue());
-                        }
-                        o.setGoodsSpecificationIdList(specificationIds);
-                        o.setGoodsSpecificationName(String.join("|", goodsSpecificationNames));
-                    }
+
+    /**
+     * 设置商品规格
+     *
+     * @param o
+     */
+    @Override
+    public void setGoodsSpecification(ProductAO o) {
+        if (!StringUtils.isEmpty(o.getGoodsSpecificationIds())) {
+            String[] goodsSpecificationIds = o.getGoodsSpecificationIds().split("_");
+            if (!Objects.isNull(goodsSpecificationIds) && goodsSpecificationIds.length > 0) {
+                List<String> specificationIds = new ArrayList();
+                List<String> goodsSpecificationNames = new ArrayList();
+                for (String id : goodsSpecificationIds) {
+                    GoodsSpecificationAO goodsSpecification = goodsSpecificationService.selectByPrimaryKey(id).getData();
+                    specificationIds.add(goodsSpecification.getSpecificationId());
+                    goodsSpecificationNames.add(goodsSpecification.getValue());
                 }
-            });
+                o.setGoodsSpecificationIdList(specificationIds);
+                o.setGoodsSpecificationName(String.join("|", goodsSpecificationNames));
+            }
         }
     }
-
 }
 
 

@@ -12,4 +12,10 @@ public interface IProductService extends IBaseAOService<ProductAO, ProductCriter
 
     ServiceResult<List<ProductAO>> list(ProductRequest request);
 
+    /**
+     * 设置商品规格
+     *
+     * @param o
+     */
+    void setGoodsSpecification(ProductAO o);
 }
