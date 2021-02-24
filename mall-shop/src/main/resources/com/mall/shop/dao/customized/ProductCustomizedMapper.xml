@@ -29,7 +29,10 @@
     LEFT JOIN goods g ON p.goods_id = g.id
     <where>
         <if test="productName != null and productName != ''">
-          g.name LIKE CONCAT('%', #{productName, jdbcType=VARCHAR},'%')
+            AND g.name LIKE CONCAT('%', #{productName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="goodsId != null and goodsId != ''">
+            AND p.goods_id = #{goodsId, jdbcType=VARCHAR}
         </if>
     </where>
     ORDER BY p.goods_id desc

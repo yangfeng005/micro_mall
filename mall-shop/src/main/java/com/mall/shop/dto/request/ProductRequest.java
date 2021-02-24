@@ -13,4 +13,9 @@ public class ProductRequest extends BaseRequest implements Serializable {
      * 商品名称
      */
     private String productName;
+
+    /**
+     * 商品id
+     */
+    private String goodsId;
 }
