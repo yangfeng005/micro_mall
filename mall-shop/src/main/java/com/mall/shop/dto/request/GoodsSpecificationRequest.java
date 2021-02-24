@@ -18,4 +18,10 @@ public class GoodsSpecificationRequest extends BaseRequest implements Serializab
      * 商品id
      */
     private String goodsId;
+
+
+    /**
+     * 规格id
+     */
+    private String specificationId;
 }
