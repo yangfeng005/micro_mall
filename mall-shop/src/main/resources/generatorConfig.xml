@@ -56,11 +56,10 @@
 
 
 
-        <table tableName="goods" domainObjectName="Goods">
+        <table tableName="purchase_order" domainObjectName="PurchaseOrder">
             <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
             <columnOverride column="ID" property="id" javaType="String" />
         </table>
-
 
 
     </context>

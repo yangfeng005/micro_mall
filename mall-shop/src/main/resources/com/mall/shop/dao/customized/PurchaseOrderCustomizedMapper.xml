@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity Order.
+                 Generated at 2021-02-26 15:29:06, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 26, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.PurchaseOrderCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.PurchaseOrderAO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+    <result column="shipping_status" property="shippingStatus" jdbcType="INTEGER" />
+    <result column="pay_status" property="payStatus" jdbcType="INTEGER" />
+    <result column="consignee" property="consignee" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="postscript" property="postscript" jdbcType="VARCHAR" />
+    <result column="shipping_id" property="shippingId" jdbcType="VARCHAR" />
+    <result column="shipping_name" property="shippingName" jdbcType="VARCHAR" />
+    <result column="pay_id" property="payId" jdbcType="VARCHAR" />
+    <result column="pay_name" property="payName" jdbcType="VARCHAR" />
+    <result column="shipping_fee" property="shippingFee" jdbcType="DECIMAL" />
+    <result column="actual_price" property="actualPrice" jdbcType="DECIMAL" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="integral_money" property="integralMoney" jdbcType="DECIMAL" />
+    <result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="freight_price" property="freightPrice" jdbcType="INTEGER" />
+    <result column="coupon_id" property="couponId" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="coupon_price" property="couponPrice" jdbcType="DECIMAL" />
+    <result column="callback_status" property="callbackStatus" jdbcType="CHAR" />
+    <result column="shipping_no" property="shippingNo" jdbcType="VARCHAR" />
+    <result column="full_cut_price" property="fullCutPrice" jdbcType="DECIMAL" />
+    <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.PurchaseOrderRequest"
+          resultMap="CustomResultMap">
+    SELECT
+         po.*
+    FROM
+         purchase_order po
+    <where>
+      <if test="orderSn != null and orderSn != ''">
+          po.order_sn LIKE CONCAT('%', #{orderSn, jdbcType=VARCHAR},'%')
+      </if>
+    </where>
+  </select>
+</mapper>
