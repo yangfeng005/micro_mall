@@ -2,9 +2,9 @@
 <!--
 
     Description: A generated data access implementation of entity Goods.
-                 Generated at 2021-02-20 16:00:02, do NOT modify!
+                 Generated at 2021-02-26 14:02:08, do NOT modify!
     Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
-    Version: 1.0.0.0, Feb 20, 2021
+    Version: 1.0.0.0, Feb 26, 2021
 
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
@@ -43,8 +43,8 @@
     <result column="is_limited" property="isLimited" jdbcType="BIT" />
     <result column="is_hot" property="isHot" jdbcType="BIT" />
     <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
-    <result column="create_user_id" property="createUserId" jdbcType="BIGINT" />
-    <result column="update_user_id" property="updateUserId" jdbcType="BIGINT" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -236,8 +236,8 @@
       #{retailPrice,jdbcType=DECIMAL}, #{sellVolume,jdbcType=INTEGER}, #{primaryProductId,jdbcType=VARCHAR}, 
       #{unitPrice,jdbcType=DECIMAL}, #{promotionDesc,jdbcType=VARCHAR}, #{promotionTag,jdbcType=VARCHAR}, 
       #{appExclusivePrice,jdbcType=DECIMAL}, #{isAppExclusive,jdbcType=BIT}, #{isLimited,jdbcType=BIT}, 
-      #{isHot,jdbcType=BIT}, #{marketPrice,jdbcType=DECIMAL}, #{createUserId,jdbcType=BIGINT}, 
-      #{updateUserId,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{isHot,jdbcType=BIT}, #{marketPrice,jdbcType=DECIMAL}, #{createUserId,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{goodsDesc,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mall.shop.entity.customized.GoodsAO" >
@@ -438,10 +438,10 @@
         #{marketPrice,jdbcType=DECIMAL},
       </if>
       <if test="createUserId != null" >
-        #{createUserId,jdbcType=BIGINT},
+        #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateUserId != null" >
-        #{updateUserId,jdbcType=BIGINT},
+        #{updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
@@ -559,10 +559,10 @@
         market_price = #{record.marketPrice,jdbcType=DECIMAL},
       </if>
       <if test="record.createUserId != null" >
-        create_user_id = #{record.createUserId,jdbcType=BIGINT},
+        create_user_id = #{record.createUserId,jdbcType=VARCHAR},
       </if>
       <if test="record.updateUserId != null" >
-        update_user_id = #{record.updateUserId,jdbcType=BIGINT},
+        update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -613,8 +613,8 @@
       is_limited = #{record.isLimited,jdbcType=BIT},
       is_hot = #{record.isHot,jdbcType=BIT},
       market_price = #{record.marketPrice,jdbcType=DECIMAL},
-      create_user_id = #{record.createUserId,jdbcType=BIGINT},
-      update_user_id = #{record.updateUserId,jdbcType=BIGINT},
+      create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       goods_desc = #{record.goodsDesc,jdbcType=LONGVARCHAR}
@@ -657,8 +657,8 @@
       is_limited = #{record.isLimited,jdbcType=BIT},
       is_hot = #{record.isHot,jdbcType=BIT},
       market_price = #{record.marketPrice,jdbcType=DECIMAL},
-      create_user_id = #{record.createUserId,jdbcType=BIGINT},
-      update_user_id = #{record.updateUserId,jdbcType=BIGINT},
+      create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -757,10 +757,10 @@
         market_price = #{marketPrice,jdbcType=DECIMAL},
       </if>
       <if test="createUserId != null" >
-        create_user_id = #{createUserId,jdbcType=BIGINT},
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateUserId != null" >
-        update_user_id = #{updateUserId,jdbcType=BIGINT},
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -808,8 +808,8 @@
       is_limited = #{isLimited,jdbcType=BIT},
       is_hot = #{isHot,jdbcType=BIT},
       market_price = #{marketPrice,jdbcType=DECIMAL},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       goods_desc = #{goodsDesc,jdbcType=LONGVARCHAR}
@@ -849,8 +849,8 @@
       is_limited = #{isLimited,jdbcType=BIT},
       is_hot = #{isHot,jdbcType=BIT},
       market_price = #{marketPrice,jdbcType=DECIMAL},
-      create_user_id = #{createUserId,jdbcType=BIGINT},
-      update_user_id = #{updateUserId,jdbcType=BIGINT},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}

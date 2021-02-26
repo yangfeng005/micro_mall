@@ -111,4 +111,25 @@ public class GoodsController {
         return goodsService.listAll(request);
     }
 
+
+    /**
+     * 上架
+     */
+    @PostMapping("/goods/enSale")
+    @RequiresPermissions("goods:manage")
+    @LogOperation(action = "商品上架")
+    public Object enSale(String[] goodsIds) {
+        return goodsService.enSale(goodsIds);
+    }
+
+    /**
+     * 下架
+     */
+    @PostMapping("/goods/unSale")
+    @RequiresPermissions("goods:manage")
+    @LogOperation(action = "商品下架")
+    public Object unSale(String[] goodsIds) {
+        return goodsService.unSale(goodsIds);
+    }
+
 }

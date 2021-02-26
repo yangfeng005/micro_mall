@@ -14,4 +14,17 @@ public interface IGoodsService extends IBaseAOService<GoodsAO, GoodsCriteria> {
 
     ServiceResult<List<GoodsAO>> listAll(GoodsRequest request);
 
+    /**
+     * 上架
+     *
+     * @return
+     */
+    ServiceResult<Boolean> enSale(String[] goodsIds);
+
+    /**
+     * 下架
+     *
+     * @return
+     */
+    ServiceResult<Boolean> unSale(String[] goodsIds);
 }
