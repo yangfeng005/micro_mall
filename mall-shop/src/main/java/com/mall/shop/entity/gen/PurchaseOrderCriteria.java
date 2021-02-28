@@ -2225,76 +2225,6 @@ public class PurchaseOrderCriteria implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andCallbackStatusIsNull() {
-            addCriterion("callback_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusIsNotNull() {
-            addCriterion("callback_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusEqualTo(String value) {
-            addCriterion("callback_status =", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusNotEqualTo(String value) {
-            addCriterion("callback_status <>", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusGreaterThan(String value) {
-            addCriterion("callback_status >", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusGreaterThanOrEqualTo(String value) {
-            addCriterion("callback_status >=", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusLessThan(String value) {
-            addCriterion("callback_status <", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusLessThanOrEqualTo(String value) {
-            addCriterion("callback_status <=", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusLike(String value) {
-            addCriterion("callback_status like", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusNotLike(String value) {
-            addCriterion("callback_status not like", value, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusIn(List<String> values) {
-            addCriterion("callback_status in", values, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusNotIn(List<String> values) {
-            addCriterion("callback_status not in", values, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusBetween(String value1, String value2) {
-            addCriterion("callback_status between", value1, value2, "callbackStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andCallbackStatusNotBetween(String value1, String value2) {
-            addCriterion("callback_status not between", value1, value2, "callbackStatus");
-            return (Criteria) this;
-        }
-
         public Criteria andShippingNoIsNull() {
             addCriterion("shipping_no is null");
             return (Criteria) this;
@@ -2492,6 +2422,66 @@ public class PurchaseOrderCriteria implements Serializable {
 
         public Criteria andOrderTypeNotBetween(String value1, String value2) {
             addCriterion("order_type not between", value1, value2, "orderType");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusIsNull() {
+            addCriterion("callback_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusIsNotNull() {
+            addCriterion("callback_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusEqualTo(Integer value) {
+            addCriterion("callback_status =", value, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusNotEqualTo(Integer value) {
+            addCriterion("callback_status <>", value, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusGreaterThan(Integer value) {
+            addCriterion("callback_status >", value, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("callback_status >=", value, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusLessThan(Integer value) {
+            addCriterion("callback_status <", value, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("callback_status <=", value, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusIn(List<Integer> values) {
+            addCriterion("callback_status in", values, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusNotIn(List<Integer> values) {
+            addCriterion("callback_status not in", values, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusBetween(Integer value1, Integer value2) {
+            addCriterion("callback_status between", value1, value2, "callbackStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallbackStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("callback_status not between", value1, value2, "callbackStatus");
             return (Criteria) this;
         }
     }

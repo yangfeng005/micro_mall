@@ -41,10 +41,10 @@
     <result column="coupon_id" property="couponId" jdbcType="INTEGER" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
     <result column="coupon_price" property="couponPrice" jdbcType="DECIMAL" />
-    <result column="callback_status" property="callbackStatus" jdbcType="CHAR" />
     <result column="shipping_no" property="shippingNo" jdbcType="VARCHAR" />
     <result column="full_cut_price" property="fullCutPrice" jdbcType="DECIMAL" />
     <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+    <result column="callback_status" property="callbackStatus" jdbcType="INTEGER" />
   </resultMap>
 
   <select id="listByCondition" parameterType="com.mall.shop.dto.request.PurchaseOrderRequest"
