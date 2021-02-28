@@ -111,5 +111,16 @@ public class PurchaseOrderController {
         return purchaseOrderService.listAll(request);
     }
 
-
+    /**
+     * 发货
+     *
+     * @param order
+     * @return
+     */
+    @PostMapping("/order/sendGoods")
+    @RequiresPermissions("order:manage")
+    @LogOperation(action = "发货")
+    public Object sendGoods(PurchaseOrderAO order) {
+        return purchaseOrderService.sendGoods(order);
+    }
 }

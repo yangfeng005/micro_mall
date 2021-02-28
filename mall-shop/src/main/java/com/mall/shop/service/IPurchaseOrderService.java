@@ -14,4 +14,6 @@ public interface IPurchaseOrderService extends IBaseAOService<PurchaseOrderAO, P
 
     ServiceResult<List<PurchaseOrderAO>> listAll(PurchaseOrderRequest request);
 
+    ServiceResult<Boolean> sendGoods(PurchaseOrderAO order);
+
 }
