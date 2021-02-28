@@ -29,7 +29,7 @@ public class OrderGoodsController {
      * @return
      */
     @PostMapping(value = "/orderGoods/list")
-    @LogOperation(action = "分页查询订单商品")
+    @LogOperation(action = "查询订单商品")
     public Object list(OrderGoodsRequest request) {
         return orderGoodsService.list(request);
     }
