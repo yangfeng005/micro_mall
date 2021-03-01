@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity Ad.
+                 Generated at 2021-02-20 16:00:02, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 20, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.AdCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.AdAO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="ad_position_id" property="adPositionId" jdbcType="VARCHAR" />
+    <result column="media_type" property="mediaType" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="link" property="link" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="enabled" property="enabled" jdbcType="BIT" />
+    <result column="image_url" property="imageUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.AdRequest"
+          resultMap="CustomResultMap">
+    SELECT
+          a.*,
+          ap.name as adPositionName
+    FROM
+         ad a
+    LEFT JOIN ad_position ap ON ap.id = a.ad_position_id
+    <where>
+        <if test="name != null and name != ''">
+           a.name LIKE CONCAT('%', #{name, jdbcType=VARCHAR},'%')
+        </if>
+    </where>
+  </select>
+
+</mapper>
