@@ -12,4 +12,5 @@ public interface IAdPositionService extends IBaseAOService<AdPositionAO, AdPosit
 
     ServiceResult<List<AdPositionAO>> list(AdPositionRequest request);
 
+    ServiceResult<List<AdPositionAO>> listAll();
 }

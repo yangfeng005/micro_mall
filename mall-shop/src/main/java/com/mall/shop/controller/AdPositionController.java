@@ -99,4 +99,17 @@ public class AdPositionController {
         return adPositionService.deleteById(id);
     }
 
+
+    /**
+     * 查询所有广告位置
+     *
+     * @return
+     */
+    @PostMapping(value = "/adPosition/listAll")
+    @RequiresPermissions(value = {"adPosition:view", "adPosition:manage"}, logical = Logical.OR)
+    @LogOperation(action = "查询所有广告位置")
+    public Object list() {
+        return adPositionService.listAll();
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.mall.shop.entity.gen;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -58,6 +60,7 @@ public class Ad implements Serializable {
      *
      * @mbggenerated
      */
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     private Date endTime;
 
     /**

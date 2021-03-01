@@ -3,6 +3,7 @@ package com.mall.shop.service.impl;
 import com.backstage.common.page.Page;
 import com.backstage.core.mapper.BaseGeneratedMapper;
 import com.backstage.core.result.ServiceResult;
+import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.core.service.AbstractBaseAOService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -54,6 +55,12 @@ public class AdPositionService extends AbstractBaseAOService<AdPositionAO, AdPos
         ret.setSucceed(true);
         ret.setAdditionalProperties("page", Page.obtainPage(new PageInfo(adPositionAOList)));
         return ret;
+    }
+
+
+    @Override
+    public ServiceResult<List<AdPositionAO>> listAll() {
+        return ServiceResultHelper.genResultWithSuccess(adPositionCustomizedMapper.listByCondition(null));
     }
 
 }
