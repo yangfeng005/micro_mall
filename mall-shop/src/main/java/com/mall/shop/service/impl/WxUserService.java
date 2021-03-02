@@ -3,6 +3,7 @@ package com.mall.shop.service.impl;
 import com.backstage.common.page.Page;
 import com.backstage.core.mapper.BaseGeneratedMapper;
 import com.backstage.core.result.ServiceResult;
+import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.core.service.AbstractBaseAOService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -13,6 +14,7 @@ import com.mall.shop.entity.customized.WxUserAO;
 import com.mall.shop.entity.gen.WxUserCriteria;
 import com.mall.shop.service.IWxUserService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -52,6 +54,23 @@ public class WxUserService extends AbstractBaseAOService<WxUserAO, WxUserCriteri
         ret.setSucceed(true);
         ret.setAdditionalProperties("page", Page.obtainPage(new PageInfo(wxUserAOList)));
         return ret;
+    }
+
+    /**
+     * 根据openid查询
+     *
+     * @param openId
+     * @return
+     */
+    @Override
+    public ServiceResult<WxUserAO> queryByOpenId(String openId) {
+        WxUserCriteria criteria = new WxUserCriteria();
+        criteria.createCriteria().andWeixinOpenidEqualTo(openId);
+        List<WxUserAO> users = selectByCriteria(criteria).getData();
+        if (!CollectionUtils.isEmpty(users)) {
+            return ServiceResultHelper.genResultWithSuccess(users.get(0));
+        }
+        return ServiceResultHelper.genResultWithSuccess();
     }
 
 }

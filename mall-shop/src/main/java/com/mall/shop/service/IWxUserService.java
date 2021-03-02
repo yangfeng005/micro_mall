@@ -12,4 +12,12 @@ public interface IWxUserService extends IBaseAOService<WxUserAO, WxUserCriteria>
 
     ServiceResult<List<WxUserAO>> list(WxUserRequest request);
 
+
+    /**
+     * 根据openid查询
+     *
+     * @param openId
+     * @return
+     */
+    ServiceResult<WxUserAO> queryByOpenId(String openId);
 }
