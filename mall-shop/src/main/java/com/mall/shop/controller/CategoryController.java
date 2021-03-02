@@ -38,7 +38,7 @@ public class CategoryController {
             @ApiImplicitParam(name = "code", value = "分类编码", dataType = "String", paramType = "query", required = false),
     })
     @PostMapping("/list")
-    @RequiresPermissions(value = {"categoryManage:view", "categoryManage:manage"}, logical = Logical.OR)
+    @RequiresPermissions(value = {"category:view", "category:manage"}, logical = Logical.OR)
     @LogOperation(action = "查询商品类型树形结构数据")
     public Object list(CategoryRequest request) {
         return categoryService.list(request);
@@ -71,7 +71,7 @@ public class CategoryController {
             @ApiImplicitParam(name = "wapBannerUrl", value = "手机banner", dataType = "String", paramType = "query", required = false),
     })
     @PostMapping("/save")
-    @RequiresPermissions("categoryManage:manage")
+    @RequiresPermissions("category:manage")
     @LogOperation(action = "保存商品类型")
     public Object save(CategoryAO category) {
         return categoryService.save(category);
@@ -89,7 +89,7 @@ public class CategoryController {
             @ApiImplicitParam(name = "categoryId", value = "id", dataType = "String", paramType = "query", required = true),
     })
     @GetMapping("/delete")
-    @RequiresPermissions("categoryManage:manage")
+    @RequiresPermissions("category:manage")
     @LogOperation(action = "删除商品类型")
     public Object delete(@RequestParam String categoryId) {
         return categoryService.delete(categoryId);
