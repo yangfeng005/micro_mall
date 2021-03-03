@@ -56,7 +56,7 @@
 
 
 
-        <table tableName="ad_position" domainObjectName="AdPosition">
+        <table tableName="brand" domainObjectName="Brand">
             <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
             <columnOverride column="ID" property="id" javaType="String" />
         </table>

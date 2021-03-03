@@ -10,40 +10,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mall.shop.dao.customized.GoodsCustomizedMapper" >
   <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.GoodsAO" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
-    <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
-    <result column="goods_number" property="goodsNumber" jdbcType="INTEGER" />
-    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
-    <result column="goods_brief" property="goodsBrief" jdbcType="VARCHAR" />
-    <result column="is_on_sale" property="isOnSale" jdbcType="BIT" />
-    <result column="sort_order" property="sortOrder" jdbcType="SMALLINT" />
-    <result column="is_delete" property="isDelete" jdbcType="BIT" />
-    <result column="attribute_category" property="attributeCategory" jdbcType="VARCHAR" />
-    <result column="counter_price" property="counterPrice" jdbcType="DECIMAL" />
-    <result column="extra_price" property="extraPrice" jdbcType="DECIMAL" />
-    <result column="is_new" property="isNew" jdbcType="BIT" />
-    <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
-    <result column="primary_pic_url" property="primaryPicUrl" jdbcType="VARCHAR" />
-    <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR" />
-    <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
-    <result column="sell_volume" property="sellVolume" jdbcType="INTEGER" />
-    <result column="primary_product_id" property="primaryProductId" jdbcType="VARCHAR" />
-    <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
-    <result column="promotion_desc" property="promotionDesc" jdbcType="VARCHAR" />
-    <result column="promotion_tag" property="promotionTag" jdbcType="VARCHAR" />
-    <result column="app_exclusive_price" property="appExclusivePrice" jdbcType="DECIMAL" />
-    <result column="is_app_exclusive" property="isAppExclusive" jdbcType="BIT" />
-    <result column="is_limited" property="isLimited" jdbcType="BIT" />
-    <result column="is_hot" property="isHot" jdbcType="BIT" />
-    <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
-    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
-    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="goods_desc" property="goodsDesc" jdbcType="LONGVARCHAR" />
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
+      <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="brand_id" property="brandId" jdbcType="VARCHAR" />
+      <result column="goods_number" property="goodsNumber" jdbcType="INTEGER" />
+      <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+      <result column="goods_brief" property="goodsBrief" jdbcType="VARCHAR" />
+      <result column="is_on_sale" property="isOnSale" jdbcType="BIT" />
+      <result column="sort_order" property="sortOrder" jdbcType="SMALLINT" />
+      <result column="is_delete" property="isDelete" jdbcType="BIT" />
+      <result column="attribute_category" property="attributeCategory" jdbcType="VARCHAR" />
+      <result column="counter_price" property="counterPrice" jdbcType="DECIMAL" />
+      <result column="extra_price" property="extraPrice" jdbcType="DECIMAL" />
+      <result column="is_new" property="isNew" jdbcType="BIT" />
+      <result column="goods_unit" property="goodsUnit" jdbcType="VARCHAR" />
+      <result column="primary_pic_url" property="primaryPicUrl" jdbcType="VARCHAR" />
+      <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR" />
+      <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
+      <result column="sell_volume" property="sellVolume" jdbcType="INTEGER" />
+      <result column="primary_product_id" property="primaryProductId" jdbcType="VARCHAR" />
+      <result column="unit_price" property="unitPrice" jdbcType="DECIMAL" />
+      <result column="promotion_desc" property="promotionDesc" jdbcType="VARCHAR" />
+      <result column="promotion_tag" property="promotionTag" jdbcType="VARCHAR" />
+      <result column="app_exclusive_price" property="appExclusivePrice" jdbcType="DECIMAL" />
+      <result column="is_app_exclusive" property="isAppExclusive" jdbcType="BIT" />
+      <result column="is_limited" property="isLimited" jdbcType="BIT" />
+      <result column="is_hot" property="isHot" jdbcType="BIT" />
+      <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
+      <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+      <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+      <result column="goods_desc" property="goodsDesc" jdbcType="LONGVARCHAR" />
   </resultMap>
 
   <select id="listByCondition" parameterType="com.mall.shop.dto.request.GoodsRequest"
@@ -60,9 +60,47 @@
     LEFT JOIN attribute_category ac ON g.attribute_category = ac.id
     <where>
         <if test="name != null and name != ''">
-           g.name LIKE CONCAT('%', #{name, jdbcType=VARCHAR},'%')
+            and g.name LIKE CONCAT('%', #{name, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="isNew">
+            and g.is_new = #{isNew}
+        </if>
+        <if test="isHot">
+            and g.is_hot = #{isHot}
+        </if>
+        <if test="brandId != null and brandId != ''">
+            and g.brand_id = #{brandId}
+        </if>
+        <if test="categoryId != null and categoryId != ''">
+            and g.category_id = #{categoryId}
+        </if>
+        <if test="isDelete">
+            and g.is_delete = #{isDelete}
+        </if>
+        <if test="isOnSale">
+            and g.is_on_sale = #{isOnSale}
+        </if>
+        <if test="categoryIds != null">
+            and g.category_id in
+            <foreach item="item" collection="categoryIds" open="(" separator="," close=")">
+              #{item}
+            </foreach>
+        </if>
+        <if test="goodsIds != null">
+            and g.id in
+            <foreach item="item" collection="goodsIds" open="(" separator="," close=")">
+              #{item}
+            </foreach>
         </if>
     </where>
+    <choose>
+          <when test="order != null and order.trim() != ''">
+              order by ${order}
+          </when>
+          <otherwise>
+              order by g.id desc
+          </otherwise>
+    </choose>
   </select>
 
 </mapper>

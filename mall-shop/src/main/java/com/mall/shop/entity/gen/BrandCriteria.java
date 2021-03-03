@@ -954,52 +954,52 @@ public class BrandCriteria implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderEqualTo(Byte value) {
+        public Criteria andNewSortOrderEqualTo(Integer value) {
             addCriterion("new_sort_order =", value, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderNotEqualTo(Byte value) {
+        public Criteria andNewSortOrderNotEqualTo(Integer value) {
             addCriterion("new_sort_order <>", value, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderGreaterThan(Byte value) {
+        public Criteria andNewSortOrderGreaterThan(Integer value) {
             addCriterion("new_sort_order >", value, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderGreaterThanOrEqualTo(Byte value) {
+        public Criteria andNewSortOrderGreaterThanOrEqualTo(Integer value) {
             addCriterion("new_sort_order >=", value, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderLessThan(Byte value) {
+        public Criteria andNewSortOrderLessThan(Integer value) {
             addCriterion("new_sort_order <", value, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderLessThanOrEqualTo(Byte value) {
+        public Criteria andNewSortOrderLessThanOrEqualTo(Integer value) {
             addCriterion("new_sort_order <=", value, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderIn(List<Byte> values) {
+        public Criteria andNewSortOrderIn(List<Integer> values) {
             addCriterion("new_sort_order in", values, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderNotIn(List<Byte> values) {
+        public Criteria andNewSortOrderNotIn(List<Integer> values) {
             addCriterion("new_sort_order not in", values, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderBetween(Byte value1, Byte value2) {
+        public Criteria andNewSortOrderBetween(Integer value1, Integer value2) {
             addCriterion("new_sort_order between", value1, value2, "newSortOrder");
             return (Criteria) this;
         }
 
-        public Criteria andNewSortOrderNotBetween(Byte value1, Byte value2) {
+        public Criteria andNewSortOrderNotBetween(Integer value1, Integer value2) {
             addCriterion("new_sort_order not between", value1, value2, "newSortOrder");
             return (Criteria) this;
         }

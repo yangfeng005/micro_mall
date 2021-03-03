@@ -108,7 +108,7 @@ public class GoodsController {
     @RequiresPermissions(value = {"goods:view", "goods:manage"}, logical = Logical.OR)
     @LogOperation(action = "查询所有商品")
     public Object listAll(GoodsRequest request) {
-        return goodsService.listAll(request);
+        return goodsService.listByCondition(request);
     }
 
 

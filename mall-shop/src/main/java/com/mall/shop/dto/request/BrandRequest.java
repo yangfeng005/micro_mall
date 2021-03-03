@@ -13,4 +13,8 @@ public class BrandRequest extends BaseRequest implements Serializable {
      * 名称
      */
     private String name;
+
+    private Boolean isNew;
+
+    private String order;
 }

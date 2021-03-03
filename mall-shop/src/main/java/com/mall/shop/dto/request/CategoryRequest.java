@@ -5,6 +5,7 @@ import com.backstage.core.request.BaseRequest;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class CategoryRequest extends BaseRequest implements Serializable {
@@ -19,4 +20,14 @@ public class CategoryRequest extends BaseRequest implements Serializable {
      * 编码
      */
     private String code;
+
+
+    private String notName;
+
+
+    private String parentCode;
+
+    private String order;
+
+    private List<String> ids;
 }

@@ -7,17 +7,16 @@ import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.core.service.AbstractBaseAOService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mall.shop.dao.customized.BrandCustomizedMapper;
 import com.mall.shop.dao.gen.BrandGeneratedMapper;
 import com.mall.shop.dto.request.BrandRequest;
 import com.mall.shop.entity.customized.BrandAO;
 import com.mall.shop.entity.gen.BrandCriteria;
 import com.mall.shop.service.IBrandService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 品牌制造商服务
@@ -30,6 +29,8 @@ public class BrandService extends AbstractBaseAOService<BrandAO, BrandCriteria> 
     @Resource
     private BrandGeneratedMapper brandGeneratedMapper;
 
+    @Resource
+    private BrandCustomizedMapper brandCustomizedMapper;
 
     @Override
     protected BaseGeneratedMapper<BrandAO, BrandCriteria> getGeneratedMapper() {
@@ -47,7 +48,7 @@ public class BrandService extends AbstractBaseAOService<BrandAO, BrandCriteria> 
     public ServiceResult<List<BrandAO>> list(BrandRequest request) {
         ServiceResult<List<BrandAO>> ret = new ServiceResult();
         PageHelper.startPage(request.getPageNo(), request.getPageSize());
-        List<BrandAO> brandAOList = listByCondition(request);
+        List<BrandAO> brandAOList = brandCustomizedMapper.listByCondition(request);
         ret.setData(brandAOList);
         ret.setSucceed(true);
         ret.setAdditionalProperties("page", Page.obtainPage(new PageInfo(brandAOList)));
@@ -55,18 +56,9 @@ public class BrandService extends AbstractBaseAOService<BrandAO, BrandCriteria> 
     }
 
 
-    public List<BrandAO> listByCondition(BrandRequest request) {
-        BrandCriteria criteria = new BrandCriteria();
-        BrandCriteria.Criteria c = criteria.createCriteria();
-        if (!Objects.isNull(request) && StringUtils.isNotBlank(request.getName())) {
-            c.andNameLike("%" + request.getName() + "%");
-        }
-        return selectByCriteria(criteria).getData();
-    }
-
     @Override
-    public ServiceResult<List<BrandAO>> listAll() {
-        return ServiceResultHelper.genResultWithSuccess(listByCondition(null));
+    public ServiceResult<List<BrandAO>> listByCondition(BrandRequest request) {
+        return ServiceResultHelper.genResultWithSuccess(brandCustomizedMapper.listByCondition(request));
     }
 
 }

@@ -35,4 +35,7 @@ public interface ICategoryService extends IBaseAOService<CategoryAO, CategoryCri
      */
     ServiceResult<Boolean> delete(String categoryId);
 
+
+    ServiceResult<List<CategoryAO>> listByContidion(CategoryRequest request);
+
 }

@@ -13,4 +13,12 @@ public class AdRequest extends BaseRequest implements Serializable {
      * 名称
      */
     private String name;
+
+    /**
+     * 广告位置id
+     */
+    private String adPositionId;
+
+
+    private Boolean enabled;
 }

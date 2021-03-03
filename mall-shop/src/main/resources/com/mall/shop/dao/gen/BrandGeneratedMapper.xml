@@ -2,9 +2,9 @@
 <!--
 
     Description: A generated data access implementation of entity Brand.
-                 Generated at 2021-02-19 15:43:00, do NOT modify!
+                 Generated at 2021-03-03 15:57:19, do NOT modify!
     Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
-    Version: 1.0.0.0, Feb 19, 2021
+    Version: 1.0.0.0, Mar 03, 2021
 
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
@@ -25,7 +25,7 @@
     <result column="app_list_pic_url" property="appListPicUrl" jdbcType="VARCHAR" />
     <result column="is_new" property="isNew" jdbcType="BIT" />
     <result column="new_pic_url" property="newPicUrl" jdbcType="VARCHAR" />
-    <result column="new_sort_order" property="newSortOrder" jdbcType="TINYINT" />
+    <result column="new_sort_order" property="newSortOrder" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Criteria_Where_Clause" >
     <!--
@@ -163,7 +163,7 @@
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{listPicUrl,jdbcType=VARCHAR}, 
       #{simpleDesc,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, #{sortOrder,jdbcType=INTEGER}, 
       #{isShow,jdbcType=BIT}, #{floorPrice,jdbcType=DECIMAL}, #{appListPicUrl,jdbcType=VARCHAR}, 
-      #{isNew,jdbcType=BIT}, #{newPicUrl,jdbcType=VARCHAR}, #{newSortOrder,jdbcType=TINYINT}
+      #{isNew,jdbcType=BIT}, #{newPicUrl,jdbcType=VARCHAR}, #{newSortOrder,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.mall.shop.entity.customized.BrandAO" >
@@ -244,7 +244,7 @@
         #{newPicUrl,jdbcType=VARCHAR},
       </if>
       <if test="newSortOrder != null" >
-        #{newSortOrder,jdbcType=TINYINT},
+        #{newSortOrder,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -299,7 +299,7 @@
         new_pic_url = #{record.newPicUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.newSortOrder != null" >
-        new_sort_order = #{record.newSortOrder,jdbcType=TINYINT},
+        new_sort_order = #{record.newSortOrder,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -323,7 +323,7 @@
       app_list_pic_url = #{record.appListPicUrl,jdbcType=VARCHAR},
       is_new = #{record.isNew,jdbcType=BIT},
       new_pic_url = #{record.newPicUrl,jdbcType=VARCHAR},
-      new_sort_order = #{record.newSortOrder,jdbcType=TINYINT}
+      new_sort_order = #{record.newSortOrder,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Criteria_Where_Clause" />
     </if>
@@ -366,7 +366,7 @@
         new_pic_url = #{newPicUrl,jdbcType=VARCHAR},
       </if>
       <if test="newSortOrder != null" >
-        new_sort_order = #{newSortOrder,jdbcType=TINYINT},
+        new_sort_order = #{newSortOrder,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -387,7 +387,7 @@
       app_list_pic_url = #{appListPicUrl,jdbcType=VARCHAR},
       is_new = #{isNew,jdbcType=BIT},
       new_pic_url = #{newPicUrl,jdbcType=VARCHAR},
-      new_sort_order = #{newSortOrder,jdbcType=TINYINT}
+      new_sort_order = #{newSortOrder,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

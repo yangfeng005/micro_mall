@@ -61,7 +61,7 @@ public class GoodsService extends AbstractBaseAOService<GoodsAO, GoodsCriteria> 
 
 
     @Override
-    public ServiceResult<List<GoodsAO>> listAll(GoodsRequest request) {
+    public ServiceResult<List<GoodsAO>> listByCondition(GoodsRequest request) {
         return ServiceResultHelper.genResultWithSuccess(goodsCustomizedMapper.listByCondition(request));
     }
 

@@ -12,4 +12,6 @@ public interface IAdService extends IBaseAOService<AdAO, AdCriteria> {
 
     ServiceResult<List<AdAO>> list(AdRequest request);
 
+
+    ServiceResult<List<AdAO>> listByCondition(AdRequest request);
 }

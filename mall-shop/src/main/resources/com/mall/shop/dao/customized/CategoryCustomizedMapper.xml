@@ -42,7 +42,24 @@
           <if test="code != null and code != ''">
               AND a1.code LIKE CONCAT('%', #{code, jdbcType=VARCHAR},'%')
           </if>
+          <if test="parentCode != null and parentCode != null">
+              and a1.parent_code = #{parentCode}
+          </if>
+          <if test="notName != null and notName != null">
+              and a1.name &lt;&gt; #{notName}
+          </if>
+          <if test="ids != null">
+              and a1.id in
+              <foreach item="item" collection="ids" open="(" separator="," close=")">
+                  #{item}
+              </foreach>
+          </if>
       </where>
+      <choose>
+          <when test="order != null and order.trim() != ''">
+              order by ${order}
+          </when>
+      </choose>
   </select>
 
   <select id="listOthers"  resultMap="CustomResultMap">

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity Brand.
+                 Generated at 2021-02-20 16:00:02, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 20, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.BrandCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.BrandAO" >
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR" />
+      <result column="simple_desc" property="simpleDesc" jdbcType="VARCHAR" />
+      <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+      <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+      <result column="is_show" property="isShow" jdbcType="BIT" />
+      <result column="floor_price" property="floorPrice" jdbcType="DECIMAL" />
+      <result column="app_list_pic_url" property="appListPicUrl" jdbcType="VARCHAR" />
+      <result column="is_new" property="isNew" jdbcType="BIT" />
+      <result column="new_pic_url" property="newPicUrl" jdbcType="VARCHAR" />
+      <result column="new_sort_order" property="newSortOrder" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.BrandRequest"
+          resultMap="CustomResultMap">
+    SELECT
+          *
+    FROM
+         brand
+    <where>
+        <if test="name != null and name != ''">
+            and name LIKE CONCAT('%', #{name, jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test="isNew">
+            and is_new = #{isNew}
+        </if>
+    </where>
+    <choose>
+      <when test="order != null and order.trim() != ''">
+          order by ${order}
+      </when>
+      <otherwise>
+          order by id desc
+      </otherwise>
+    </choose>
+  </select>
+
+</mapper>

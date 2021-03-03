@@ -128,5 +128,10 @@ public class CategoryService extends AbstractBaseAOService<CategoryAO, CategoryC
         return !CollectionUtils.isEmpty(result) ? false : true;
     }
 
+
+    @Override
+    public ServiceResult<List<CategoryAO>> listByContidion(CategoryRequest request) {
+        return ServiceResultHelper.genResultWithSuccess(categoryCustomizedMapper.list(request));
+    }
 }
 

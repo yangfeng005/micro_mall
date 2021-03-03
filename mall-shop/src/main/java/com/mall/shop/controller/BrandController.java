@@ -108,7 +108,7 @@ public class BrandController {
     @PostMapping(value = "/brand/listAll")
     @RequiresPermissions(value = {"brand:view", "brand:manage"}, logical = Logical.OR)
     @LogOperation(action = "查询所有品牌制造商")
-    public Object list() {
-        return brandService.listAll();
+    public Object listAll(BrandRequest request) {
+        return brandService.listByCondition(request);
     }
 }

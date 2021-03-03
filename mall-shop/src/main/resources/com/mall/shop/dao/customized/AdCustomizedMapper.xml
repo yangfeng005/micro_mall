@@ -33,6 +33,12 @@
         <if test="name != null and name != ''">
            a.name LIKE CONCAT('%', #{name, jdbcType=VARCHAR},'%')
         </if>
+        <if test="adPositionId != null and adPositionId != null">
+            and a.ad_position_id = #{adPositionId}
+        </if>
+        <if test="enabled">
+            and a.enabled = 1
+        </if>
     </where>
   </select>
 
