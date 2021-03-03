@@ -60,7 +60,7 @@ public class AuthController {
             return ServiceResultHelper.genResultWithFaild("登录失败", -1);
         }
 
-        Map<String, Object> resultObj = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
         UserInfo userInfo = fullUserInfo.getUserInfo();
 
         //获取openid
@@ -72,37 +72,39 @@ public class AuthController {
             return ServiceResultHelper.genResultWithFaild("登录失败", -1);
         }
         //验证用户信息完整性
-        String sha1 = CharUtil.getSha1(fullUserInfo.getRawData() + sessionData.getString("session_key"));
+       /* String sha1 = CharUtil.getSha1(fullUserInfo.getRawData() + sessionData.getString("session_key"));
         if (!fullUserInfo.getSignature().equals(sha1)) {
             return ServiceResultHelper.genResultWithFaild("登录失败", -1);
-        }
+        }*/
         Date nowTime = new Date();
-        WxUserAO userVo = wxUserService.queryByOpenId(sessionData.getString("openid")).getData();
-        if (null == userVo) {
-            userVo = new WxUserAO();
-            userVo.setUsername("微信用户" + CharUtil.getRandomString(12));
-            userVo.setPassword(sessionData.getString("openid"));
-            userVo.setRegisterTime(nowTime);
-            userVo.setRegisterIp(IPUtil.getClientIp(request));
-            userVo.setLastLoginIp(IPUtil.getClientIp(request));
-            userVo.setLastLoginTime(nowTime);
-            userVo.setWeixinOpenid(sessionData.getString("openid"));
-            userVo.setAvatar(userInfo.getAvatarUrl());
+        WxUserAO wxUser = wxUserService.queryByOpenId(sessionData.getString("openid")).getData();
+        if (null == wxUser) {
+            wxUser = new WxUserAO();
+            wxUser.setUsername("微信用户" + CharUtil.getRandomString(12));
+            wxUser.setPassword(sessionData.getString("openid"));
+            wxUser.setRegisterTime(nowTime);
+            wxUser.setRegisterIp(IPUtil.getClientIp(request));
+            wxUser.setLastLoginIp(IPUtil.getClientIp(request));
+            wxUser.setLastLoginTime(nowTime);
+            wxUser.setWeixinOpenid(sessionData.getString("openid"));
+            wxUser.setAvatar(userInfo.getAvatarUrl());
             //性别 0：未知、1：男、2：女
-            userVo.setGender(userInfo.getGender());
-            userVo.setNickname(userInfo.getNickName());
-            wxUserService.insert(userVo);
+            wxUser.setGender(userInfo.getGender());
+            wxUser.setNickname(userInfo.getNickName());
+            wxUserService.insert(wxUser);
         } else {
-            userVo.setLastLoginIp(IPUtil.getClientIp(request));
-            userVo.setLastLoginTime(nowTime);
-            wxUserService.update(userVo);
+            wxUser.setLastLoginIp(IPUtil.getClientIp(request));
+            wxUser.setLastLoginTime(nowTime);
+            wxUserService.update(wxUser);
         }
 
         Map<String, Object> map = new HashMap();
-        resultObj.put("token", JWTUtil.sign(map));
-        resultObj.put("userInfo", userInfo);
-        resultObj.put("userId", userVo.getId());
-        return ServiceResultHelper.genResultWithSuccess(resultObj);
+        map.put("userName", wxUser.getUsername());
+        map.put("userId", wxUser.getId());
+        result.put("token", JWTUtil.sign(map));
+        result.put("userInfo", userInfo);
+        result.put("userId", wxUser.getId());
+        return ServiceResultHelper.genResultWithSuccess(result);
     }
 
     public JSONObject getJsonRequest(HttpServletRequest request) {

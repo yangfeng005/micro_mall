@@ -5,7 +5,8 @@ import com.mall.wx.exception.ApiRRException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * 权限(Token)验证
  */
 @Component
-public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
+public class AuthorizationInterceptor implements HandlerInterceptor {
 
     public static final String LOGIN_USER_KEY = "LOGIN_USER_KEY";
     public static final String LOGIN_TOKEN_KEY = "X-Nideshop-Token";
@@ -25,7 +26,6 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
         //支持跨域请求
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with,X-Nideshop-Token,X-URL-PATH,content-type");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
@@ -58,4 +58,17 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
         return true;
     }
+
+    //方法执行后
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
+
+    }
+
+    //页面渲染前
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+
+    }
+
 }
