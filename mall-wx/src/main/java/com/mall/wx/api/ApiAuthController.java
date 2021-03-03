@@ -33,9 +33,9 @@ import java.util.Map;
 @Api(tags = "API登录授权接口")
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class ApiAuthController {
 
-    private static Logger LOG = LoggerFactory.getLogger(AuthController.class);
+    private static Logger LOG = LoggerFactory.getLogger(ApiAuthController.class);
 
     @Resource
     public IWxUserService wxUserService;
