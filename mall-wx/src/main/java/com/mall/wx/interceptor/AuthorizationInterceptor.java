@@ -1,5 +1,10 @@
 package com.mall.wx.interceptor;
 
+import com.auth0.jwt.exceptions.SignatureVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.backstage.core.jwt.JWTUtil;
+import com.mall.shop.entity.customized.WxUserAO;
+import com.mall.shop.service.IWxUserService;
 import com.mall.wx.annoation.IgnoreAuth;
 import com.mall.wx.exception.ApiRRException;
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +13,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +25,9 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
     public static final String LOGIN_USER_KEY = "LOGIN_USER_KEY";
     public static final String LOGIN_TOKEN_KEY = "X-Nideshop-Token";
+
+    @Resource
+    private IWxUserService wxUserService;
 
 
     @Override
@@ -54,8 +63,26 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             throw new ApiRRException("请先登录", 401);
         }
 
-        //todo token过期
-
+        //校验token
+        String userId = JWTUtil.getFieldValue(token, "userId");
+        if (StringUtils.isEmpty(userId)) {
+            throw new ApiRRException("token错误!");
+        } else {
+            WxUserAO user = wxUserService.selectByPrimaryKey(userId).getData();
+            if (user == null) {
+                throw new ApiRRException("用户不存在!");
+            } else {
+                try {
+                    JWTUtil.verify(token, "userId", userId);
+                } catch (TokenExpiredException var6) {
+                    throw new ApiRRException("token已过期!");
+                } catch (SignatureVerificationException var7) {
+                    throw new ApiRRException("密码不正确!");
+                } catch (Exception e) {
+                    throw new ApiRRException("token认证失败!");
+                }
+            }
+        }
         return true;
     }
 
