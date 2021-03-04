@@ -67,7 +67,7 @@ public class GoodsController {
     @RequiresPermissions("goods:manage")
     @LogOperation(action = "新增商品")
     public Object insert(GoodsAO goods) {
-        return goodsService.insert(goods);
+        return goodsService.save(goods);
     }
 
     /**
@@ -80,7 +80,7 @@ public class GoodsController {
     @RequiresPermissions("goods:manage")
     @LogOperation(action = "修改商品")
     public Object updateById(@Validated @RequestBody GoodsAO goods) {
-        return goodsService.saveOrUpdate(goods);
+        return goodsService.save(goods);
     }
 
     /**

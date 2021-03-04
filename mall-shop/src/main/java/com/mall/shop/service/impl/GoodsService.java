@@ -14,6 +14,7 @@ import com.mall.shop.dao.gen.GoodsGeneratedMapper;
 import com.mall.shop.dto.request.GoodsRequest;
 import com.mall.shop.entity.customized.GoodsAO;
 import com.mall.shop.entity.gen.GoodsCriteria;
+import com.mall.shop.service.IGoodsGalleryService;
 import com.mall.shop.service.IGoodsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +36,9 @@ public class GoodsService extends AbstractBaseAOService<GoodsAO, GoodsCriteria> 
 
     @Resource
     private GoodsCustomizedMapper goodsCustomizedMapper;
+
+    @Resource
+    private IGoodsGalleryService goodsGalleryService;
 
     @Override
     protected BaseGeneratedMapper<GoodsAO, GoodsCriteria> getGeneratedMapper() {
@@ -97,5 +101,13 @@ public class GoodsService extends AbstractBaseAOService<GoodsAO, GoodsCriteria> 
         return ServiceResultHelper.genResultWithSuccess();
     }
 
+
+    @Transactional
+    @Override
+    public ServiceResult<Boolean> save(GoodsAO goods) {
+        GoodsAO data = saveOrUpdateRetAO(goods).getData();
+        goodsGalleryService.save(data.getId(), goods.getGalleryImgIds());
+        return ServiceResultHelper.genResultWithSuccess();
+    }
 }
 

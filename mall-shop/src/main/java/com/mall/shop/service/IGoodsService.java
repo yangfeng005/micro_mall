@@ -27,4 +27,13 @@ public interface IGoodsService extends IBaseAOService<GoodsAO, GoodsCriteria> {
      * @return
      */
     ServiceResult<Boolean> unSale(String[] goodsIds);
+
+
+    /**
+     * 保存商品
+     *
+     * @param goods
+     * @return
+     */
+    ServiceResult<Boolean> save(GoodsAO goods);
 }

@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 应用对象 - Goods.
@@ -38,6 +39,19 @@ public final class GoodsAO extends Goods implements Serializable {
      */
     private String attributeCategoryName;
 
+    /**
+     * 商品轮播图
+     */
+    private List<String> galleryImgIds;
+
+
+    public List<String> getGalleryImgIds() {
+        return galleryImgIds;
+    }
+
+    public void setGalleryImgIds(List<String> galleryImgIds) {
+        this.galleryImgIds = galleryImgIds;
+    }
 
     public String getCategoryName() {
         return categoryName;

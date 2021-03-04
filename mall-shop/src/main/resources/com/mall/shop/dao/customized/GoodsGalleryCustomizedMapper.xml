@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity GoodsGallery.
+                 Generated at 2021-02-20 16:00:02, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 20, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.GoodsGalleryCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.GoodsGalleryAO" >
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+      <result column="img_desc" property="imgDesc" jdbcType="VARCHAR" />
+      <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+      <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.GoodsGalleryRequest"
+          resultMap="CustomResultMap">
+    SELECT
+          *
+    FROM
+         goods_gallery
+    <where>
+        <if test="goodsId">
+            and goods_id = #{goodsId}
+        </if>
+    </where>
+    <choose>
+      <when test="order != null and order.trim() != ''">
+          order by ${order}
+      </when>
+      <otherwise>
+          order by id desc
+      </otherwise>
+    </choose>
+  </select>
+
+</mapper>
