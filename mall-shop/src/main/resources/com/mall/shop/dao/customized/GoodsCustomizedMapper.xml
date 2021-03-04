@@ -74,6 +74,9 @@
         <if test="categoryId != null and categoryId != ''">
             and g.category_id = #{categoryId}
         </if>
+        <if test="excludeGoodsId != null and excludeGoodsId != ''">
+            and g.id &lt;&gt; #{excludeGoodsId}
+        </if>
         <if test="isDelete">
             and g.is_delete = #{isDelete}
         </if>

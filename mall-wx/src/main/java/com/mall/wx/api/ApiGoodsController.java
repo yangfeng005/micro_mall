@@ -4,10 +4,12 @@ import com.backstage.core.jwt.JWTUtil;
 import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.system.service.IUserService;
 import com.mall.shop.dto.request.GoodsGalleryRequest;
+import com.mall.shop.dto.request.GoodsRequest;
 import com.mall.shop.dto.request.GoodsSpecificationRequest;
 import com.mall.shop.dto.request.ProductRequest;
 import com.mall.shop.entity.customized.*;
 import com.mall.shop.service.*;
+import com.mall.wx.annoation.IgnoreAuth;
 import com.mall.wx.interceptor.AuthorizationInterceptor;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -218,9 +220,9 @@ public class ApiGoodsController {
         return ServiceResultHelper.genResultWithSuccess(resultObj);
     }
 
-    /* *//**
+    /* *
      * 　获取分类下的商品
-     *//*
+
     @ApiOperation(value = " 获取分类下的商品")
     @ApiImplicitParams({@ApiImplicitParam(name = "id", value = "分类id", paramType = "path", required = true)})
     @IgnoreAuth
@@ -241,9 +243,9 @@ public class ApiGoodsController {
         return toResponsSuccess(resultObj);
     }
 
-    *//**
+    *
      * 　　获取商品列表
-     *//*
+
     @ApiOperation(value = "获取商品列表")
     @ApiImplicitParams({@ApiImplicitParam(name = "categoryId", value = "分类id", paramType = "path", required = true),
             @ApiImplicitParam(name = "brandId", value = "品牌Id", paramType = "path", required = true),
@@ -354,9 +356,9 @@ public class ApiGoodsController {
         return toResponsSuccess(goodsData);
     }
 
-    *//**
+    *
      * 　　商品列表筛选的分类列表
-     *//*
+
     @ApiOperation(value = "商品列表筛选的分类列表")
     @IgnoreAuth
     @PostMapping(value = "filter")
@@ -410,9 +412,9 @@ public class ApiGoodsController {
         return toResponsSuccess(filterCategory);
     }
 
-    *//**
+    *
      * 　　新品首发
-     *//*
+
     @ApiOperation(value = "新品首发")
     @IgnoreAuth
     @PostMapping(value = "new")
@@ -426,9 +428,9 @@ public class ApiGoodsController {
         return toResponsSuccess(resultObj);
     }
 
-    *//**
+    *
      * 　　人气推荐
-     *//*
+
     @ApiOperation(value = "人气推荐")
     @IgnoreAuth
     @PostMapping(value = "hot")
@@ -440,48 +442,32 @@ public class ApiGoodsController {
         bannerInfo.put("img_url", "https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/1504208321fef4.png");
         resultObj.put("bannerInfo", bannerInfo);
         return toResponsSuccess(resultObj);
-    }
+    }*/
 
-    *//**
-     * 　　商品详情页的大家都在看的商品
-     *//*
+    /**
+     * 商品详情页的大家都在看的商品
+     *
+     * @param id
+     * @return
+     */
     @ApiOperation(value = "商品详情页")
     @IgnoreAuth
     @PostMapping(value = "related")
-    public Object related(Integer id) {
+    public Object related(String id) {
         Map<String, Object> resultObj = new HashMap();
-        Map param = new HashMap();
-        param.put("goods_id", id);
-        param.put("fields", "related_goods_id");
-        List<RelatedGoodsVo> relatedGoodsEntityList = relatedGoodsService.queryList(param);
-
-        List<Integer> relatedGoodsIds = new ArrayList();
-        for (RelatedGoodsVo relatedGoodsEntity : relatedGoodsEntityList) {
-            relatedGoodsIds.add(relatedGoodsEntity.getRelated_goods_id());
-        }
-
-        List<GoodsVo> relatedGoods = new ArrayList<GoodsVo>();
-
-        if (null == relatedGoodsIds || relatedGoods.size() < 1) {
-            //查找同分类下的商品
-            GoodsVo goodsCategory = goodsService.queryObject(id);
-            Map paramRelated = new HashMap();
-            paramRelated.put("fields", "id, name, list_pic_url, retail_price");
-            paramRelated.put("category_id", goodsCategory.getCategory_id());
-            relatedGoods = goodsService.queryList(paramRelated);
-        } else {
-            Map paramRelated = new HashMap();
-            paramRelated.put("goods_ids", relatedGoodsIds);
-            paramRelated.put("fields", "id, name, list_pic_url, retail_price");
-            relatedGoods = goodsService.queryList(paramRelated);
-        }
+        //查找同分类下的商品
+        GoodsAO goods = goodsService.selectByPrimaryKey(id).getData();
+        GoodsRequest goodsRequest = new GoodsRequest();
+        goodsRequest.setCategoryId(goods.getCategoryId());
+        goodsRequest.setExcludeGoodsId(id);
+        List<GoodsAO> relatedGoods = goodsService.listByCondition(goodsRequest).getData();
         resultObj.put("goodsList", relatedGoods);
-        return toResponsSuccess(resultObj);
+        return ServiceResultHelper.genResultWithSuccess(resultObj);
     }
 
-    *//**
+   /* *
      * 　　在售的商品总数
-     *//*
+
     @ApiOperation(value = "在售的商品总数")
     @IgnoreAuth
     @PostMapping(value = "count")
@@ -495,9 +481,9 @@ public class ApiGoodsController {
         return toResponsSuccess(resultObj);
     }
 
-    *//**
+    *
      * 　　获取商品列表
-     *//*
+
     @ApiOperation(value = "获取商品列表")
     @IgnoreAuth
     @PostMapping(value = "productlist")

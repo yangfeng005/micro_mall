@@ -10,9 +10,7 @@ import java.util.List;
 @Data
 public class GoodsRequest extends BaseRequest implements Serializable {
 
-    /**
-     * 名称
-     */
+
     private String name;
 
     private String brandId;
@@ -32,4 +30,9 @@ public class GoodsRequest extends BaseRequest implements Serializable {
     private List<String> goodsIds;
 
     private String order;
+
+    /**
+     * 排除的商品id
+     */
+    private String excludeGoodsId;
 }
