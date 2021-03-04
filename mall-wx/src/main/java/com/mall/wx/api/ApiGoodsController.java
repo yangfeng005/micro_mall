@@ -36,9 +36,9 @@ public class ApiGoodsController {
     private IProductService productService;
     @Autowired
     private IGoodsGalleryService goodsGalleryService;
+    @Autowired
+    private IGoodsIssueService goodsIssueService;
     /* @Autowired
-     private IGoodsIssueService goodsIssueService;
-     @Autowired
      private IAttributeService attributeService;*/
     @Autowired
     private IBrandService brandService;
@@ -117,11 +117,10 @@ public class ApiGoodsController {
         ngaParam.put("sidx", "nga.id");
         ngaParam.put("order", "asc");
         ngaParam.put("goods_id", id);
-        List<AttributeVo> attribute = attributeService.queryList(ngaParam);
-        //
-        Map issueParam = new HashMap();
-//        issueParam.put("goods_id", id);
-        List<GoodsIssueVo> issue = goodsIssueService.queryList(issueParam);*/
+        List<AttributeVo> attribute = attributeService.queryList(ngaParam); */
+
+        //常见问题
+        List<GoodsIssueAO> issueList = goodsIssueService.listByCondition(null).getData();
 
         //品牌制造商
         BrandAO brand = brandService.selectByPrimaryKey(good.getBrandId()).getData();
@@ -174,8 +173,8 @@ public class ApiGoodsController {
         resultObj.put("gallery", gallery);
         /* resultObj.put("attribute", attribute);
         resultObj.put("userHasCollect", userHasCollect);
-        resultObj.put("issue", issue);
         resultObj.put("comment", comment);*/
+        resultObj.put("issue", issueList);
         resultObj.put("brand", brand);
         resultObj.put("specificationList", specificationList);
         resultObj.put("productList", productList);
