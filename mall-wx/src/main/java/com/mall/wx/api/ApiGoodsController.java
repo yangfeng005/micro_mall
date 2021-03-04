@@ -3,12 +3,10 @@ package com.mall.wx.api;
 import com.backstage.core.jwt.JWTUtil;
 import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.system.service.IUserService;
+import com.mall.shop.dto.request.GoodsGalleryRequest;
 import com.mall.shop.dto.request.GoodsSpecificationRequest;
 import com.mall.shop.dto.request.ProductRequest;
-import com.mall.shop.entity.customized.BrandAO;
-import com.mall.shop.entity.customized.GoodsAO;
-import com.mall.shop.entity.customized.GoodsSpecificationAO;
-import com.mall.shop.entity.customized.ProductAO;
+import com.mall.shop.entity.customized.*;
 import com.mall.shop.service.*;
 import com.mall.wx.interceptor.AuthorizationInterceptor;
 import io.swagger.annotations.Api;
@@ -36,9 +34,9 @@ public class ApiGoodsController {
     private IGoodsSpecificationService goodsSpecificationService;
     @Autowired
     private IProductService productService;
+    @Autowired
+    private IGoodsGalleryService goodsGalleryService;
     /* @Autowired
-     private IGoodsGalleryService goodsGalleryService;
-     @Autowired
      private IGoodsIssueService goodsIssueService;
      @Autowired
      private IAttributeService attributeService;*/
@@ -79,9 +77,10 @@ public class ApiGoodsController {
         Map<String, Object> resultObj = new HashMap();
         String token = request.getHeader(AuthorizationInterceptor.LOGIN_TOKEN_KEY);
         String userId = JWTUtil.getFieldValue(token, "userId");
+        //商品
         GoodsAO good = goodsService.selectByPrimaryKey(id).getData();
 
-
+        //商品规格
         GoodsSpecificationRequest gsRequest = new GoodsSpecificationRequest();
         gsRequest.setGoodsId(id);
         gsRequest.setOrder("s.sort_order");
@@ -104,11 +103,16 @@ public class ApiGoodsController {
             specificationList.add(tmpMap);
         }
 
+        //产品
         ProductRequest productRequest = new ProductRequest();
         List<ProductAO> productList = productService.list(productRequest).getData();
-       /* //
-        List<GoodsGalleryVo> gallery = goodsGalleryService.queryList(param);
-        Map ngaParam = new HashMap();
+
+        //商品轮播图
+        GoodsGalleryRequest ggRequest = new GoodsGalleryRequest();
+        ggRequest.setGoodsId(id);
+        List<GoodsGalleryAO> gallery = goodsGalleryService.listByCondition(ggRequest).getData();
+
+       /* Map ngaParam = new HashMap();
         ngaParam.put("fields", "nga.value, na.name");
         ngaParam.put("sidx", "nga.id");
         ngaParam.put("order", "asc");
@@ -118,7 +122,8 @@ public class ApiGoodsController {
         Map issueParam = new HashMap();
 //        issueParam.put("goods_id", id);
         List<GoodsIssueVo> issue = goodsIssueService.queryList(issueParam);*/
-        //
+
+        //品牌制造商
         BrandAO brand = brandService.selectByPrimaryKey(good.getBrandId()).getData();
         //
       /*  param.put("value_id", id);
@@ -166,14 +171,14 @@ public class ApiGoodsController {
         footprintService.save(footprintEntity);*/
         //
         resultObj.put("info", good);
-       /* resultObj.put("gallery", gallery);
-        resultObj.put("attribute", attribute);
+        resultObj.put("gallery", gallery);
+        /* resultObj.put("attribute", attribute);
         resultObj.put("userHasCollect", userHasCollect);
         resultObj.put("issue", issue);
         resultObj.put("comment", comment);*/
         resultObj.put("brand", brand);
         resultObj.put("specificationList", specificationList);
-        //resultObj.put("productList", productEntityList);
+        resultObj.put("productList", productList);
         // 记录推荐人是否可以领取红包，用户登录时校验
         try {
             // 是否已经有可用的转发红包
