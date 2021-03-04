@@ -24,4 +24,8 @@ public class GoodsSpecificationRequest extends BaseRequest implements Serializab
      * 规格id
      */
     private String specificationId;
+
+
+
+    private String order;
 }

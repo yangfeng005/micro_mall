@@ -37,7 +37,21 @@
         <if test="specificationId != null and specificationId != ''">
             AND gs.specification_id = #{specificationId, jdbcType=VARCHAR}
         </if>
+        <!--<if test="ids != null">
+            and  gs.id in
+            <foreach item="id" collection="ids" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>-->
     </where>
+      <choose>
+          <when test="order != null and order.trim() != ''">
+              order by ${order}
+          </when>
+          <otherwise>
+              order by gs.id desc
+          </otherwise>
+      </choose>
   </select>
 
 </mapper>

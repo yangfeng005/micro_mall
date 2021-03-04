@@ -59,6 +59,12 @@ public class GoodsSpecificationService extends AbstractBaseAOService<GoodsSpecif
     }
 
 
+    @Override
+    public ServiceResult<List<GoodsSpecificationAO>> listByCondition(GoodsSpecificationRequest request) {
+        return ServiceResultHelper.genResultWithSuccess(goodsSpecificationCustomizedMapper.listByCondition(request));
+    }
+
+
     /**
      * 根据商品id获取规格
      *

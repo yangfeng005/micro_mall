@@ -14,6 +14,9 @@ public interface IGoodsSpecificationService extends IBaseAOService<GoodsSpecific
     ServiceResult<List<GoodsSpecificationAO>> list(GoodsSpecificationRequest request);
 
 
+    ServiceResult<List<GoodsSpecificationAO>> listByCondition(GoodsSpecificationRequest request);
+
+
     /**
      * 根据商品id获取规格
      *
