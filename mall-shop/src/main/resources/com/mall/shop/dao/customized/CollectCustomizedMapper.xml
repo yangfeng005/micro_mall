@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity Collect.
+                 Generated at 2021-02-20 16:00:02, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 20, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.CollectCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.CollectAO" >
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="user_id" property="userId" jdbcType="VARCHAR" />
+      <result column="value_id" property="valueId" jdbcType="VARCHAR" />
+      <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+      <result column="is_attention" property="isAttention" jdbcType="BIT" />
+      <result column="type_id" property="typeId" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.CollectRequest"
+          resultMap="CustomResultMap">
+    SELECT
+          *
+    FROM
+         collect
+    <where>
+        <if test="userId != null and userId != ''">
+            and user_id = #{userId, jdbcType=VARCHAR}
+        </if>
+        <if test="typeId != null and typeId != ''">
+            and type_id = #{typeId, jdbcType=VARCHAR}
+        </if>
+        <if test="valueId != null and valueId != ''">
+            and value_id = #{valueId, jdbcType=VARCHAR}
+        </if>
+    </where>
+  </select>
+
+</mapper>

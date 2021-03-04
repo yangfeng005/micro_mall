@@ -56,7 +56,7 @@
 
 
 
-        <table tableName="goods_issue" domainObjectName="GoodsIssue">
+        <table tableName="collect" domainObjectName="Collect">
             <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
             <columnOverride column="ID" property="id" javaType="String" />
         </table>

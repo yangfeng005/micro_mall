@@ -24,8 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +31,7 @@ import java.util.Map;
 @Api(tags = "API登录授权接口")
 @RestController
 @RequestMapping("/api/auth")
-public class ApiAuthController {
+public class ApiAuthController extends ApiBaseController {
 
     private static Logger LOG = LoggerFactory.getLogger(ApiAuthController.class);
 
@@ -47,7 +45,7 @@ public class ApiAuthController {
     @IgnoreAuth
     @PostMapping("loginByWx")
     public Object loginByWeixin(HttpServletRequest request) throws Exception {
-        JSONObject jsonParam = this.getJsonRequest(request);
+        JSONObject jsonParam = this.getJsonRequest();
         FullUserInfo fullUserInfo = null;
         String code = "";
         if (!StringUtils.isNullOrEmpty(jsonParam.getString("code"))) {
@@ -107,19 +105,4 @@ public class ApiAuthController {
         return ServiceResultHelper.genResultWithSuccess(result);
     }
 
-    public JSONObject getJsonRequest(HttpServletRequest request) {
-        JSONObject result = null;
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = request.getReader()) {
-            char[] buff = new char[1024];
-            int len;
-            while ((len = reader.read(buff)) != -1) {
-                sb.append(buff, 0, len);
-            }
-            result = JSONObject.parseObject(sb.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
 }
