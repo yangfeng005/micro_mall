@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity Region.
+                 Generated at 2021-02-20 16:00:02, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 20, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.RegionCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.RegionAO" >
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="code" property="code" jdbcType="VARCHAR" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.RegionRequest"
+          resultMap="CustomResultMap">
+    SELECT
+          *
+    FROM
+         region
+    <where>
+        <if test="code">
+            and code = #{code}
+        </if>
+    </where>
+  </select>
+
+  <select id="listChildrenByParentCode" resultMap="CustomResultMap">
+    SELECT
+        *
+    FROM
+         region
+    where parent_code = #{parentCode}
+  </select>
+
+</mapper>
