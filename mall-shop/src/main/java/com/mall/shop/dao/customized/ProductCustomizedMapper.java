@@ -18,4 +18,7 @@ import java.util.List;
 public interface ProductCustomizedMapper {
 
     List<ProductAO> listByCondition(ProductRequest request);
+
+
+    ProductAO getById(String id);
 }

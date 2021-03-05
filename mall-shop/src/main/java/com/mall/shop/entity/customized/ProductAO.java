@@ -30,7 +30,7 @@ public final class ProductAO extends Product implements Serializable {
     /**
      * 商品名称
      */
-    private String productName;
+    private String goodsName;
 
     /**
      * 商品规格map
@@ -46,6 +46,11 @@ public final class ProductAO extends Product implements Serializable {
      * 商品规格名称
      */
     private String goodsSpecificationName;
+
+    /**
+     * 商品图片
+     */
+    private String listPicUrl;
 
 
     public String getGoodsSpecificationName() {
@@ -72,12 +77,20 @@ public final class ProductAO extends Product implements Serializable {
         this.goodsSpecificationIdList = goodsSpecificationIdList;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
+    }
+
+    public String getListPicUrl() {
+        return listPicUrl;
+    }
+
+    public void setListPicUrl(String listPicUrl) {
+        this.listPicUrl = listPicUrl;
     }
 
     @Override

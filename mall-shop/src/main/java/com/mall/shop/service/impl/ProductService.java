@@ -3,6 +3,7 @@ package com.mall.shop.service.impl;
 import com.backstage.common.page.Page;
 import com.backstage.core.mapper.BaseGeneratedMapper;
 import com.backstage.core.result.ServiceResult;
+import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.core.service.AbstractBaseAOService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +34,6 @@ public class ProductService extends AbstractBaseAOService<ProductAO, ProductCrit
 
     @Resource
     private ProductGeneratedMapper productGeneratedMapper;
-
 
     @Resource
     private IGoodsSpecificationService goodsSpecificationService;
@@ -89,6 +89,17 @@ public class ProductService extends AbstractBaseAOService<ProductAO, ProductCrit
                 o.setGoodsSpecificationName(String.join("|", goodsSpecificationNames));
             }
         }
+    }
+
+    /**
+     * 根据主键查询
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public ServiceResult<ProductAO> getById(String id) {
+        return ServiceResultHelper.genResultWithSuccess(productCustomizedMapper.getById(id));
     }
 }
 

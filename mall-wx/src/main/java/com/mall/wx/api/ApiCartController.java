@@ -2,6 +2,8 @@ package com.mall.wx.api;
 
 import com.backstage.core.result.ServiceResultHelper;
 import com.mall.shop.dto.request.ReceiptAddressRequest;
+import com.mall.shop.entity.customized.CartAO;
+import com.mall.shop.entity.customized.ProductAO;
 import com.mall.shop.entity.customized.ReceiptAddressAO;
 import com.mall.shop.service.*;
 import com.mall.wx.util.TokenUtil;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -392,7 +395,7 @@ public class ApiCartController extends ApiBaseController {
      */
     @ApiOperation(value = "订单提交前的检验和填写相关订单信息")
     @PostMapping("checkout")
-    public Object checkout(Integer couponId, @RequestParam(defaultValue = "cart") String type) {
+    public Object checkout(String goodsId, String productId, Integer number, Integer couponId, @RequestParam(defaultValue = "cart") String type) {
         //获取token
         String token = TokenUtil.getToken(request);
         //从token中获取用户id
@@ -413,31 +416,30 @@ public class ApiCartController extends ApiBaseController {
             resultObj.put("checkedAddress", addressList.get(0));
         }
         // * 获取要购买的商品和总价
-       /* ArrayList checkedGoodsList = new ArrayList();
-        BigDecimal goodsTotalPrice;
+        ArrayList checkedGoodsList = new ArrayList();
+        BigDecimal goodsTotalPrice = null;
         if (type.equals("cart")) {
-            Map<String, Object> cartData = (Map<String, Object>) this.getCart(loginUser);
+           /* Map<String, Object> cartData = (Map<String, Object>) this.getCart(loginUser);
 
             for (CartVo cartEntity : (List<CartVo>) cartData.get("cartList")) {
                 if (cartEntity.getChecked() == 1) {
                     checkedGoodsList.add(cartEntity);
                 }
             }
-            goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");
+            goodsTotalPrice = (BigDecimal) ((HashMap) cartData.get("cartTotal")).get("checkedGoodsAmount");*/
         } else { // 是直接购买的
-            BuyGoodsVo goodsVO = (BuyGoodsVo) J2CacheUtils.get(J2CacheUtils.SHOP_CACHE_NAME, "goods" + loginUser.getUserId() + "");
-            ProductVo productInfo = productService.queryObject(goodsVO.getProductId());
+            ProductAO product = productService.getById(productId).getData();
             //计算订单的费用
             //商品总价
-            goodsTotalPrice = productInfo.getRetail_price().multiply(new BigDecimal(goodsVO.getNumber()));
+            goodsTotalPrice = product.getRetailPrice().multiply(new BigDecimal(number));
 
-            CartVo cartVo = new CartVo();
-            cartVo.setGoods_name(productInfo.getGoods_name());
-            cartVo.setNumber(goodsVO.getNumber());
-            cartVo.setRetail_price(productInfo.getRetail_price());
-            cartVo.setList_pic_url(productInfo.getList_pic_url());
+            CartAO cartVo = new CartAO();
+            cartVo.setGoodsName(product.getGoodsName());
+            cartVo.setNumber(number);
+            cartVo.setRetailPrice(product.getRetailPrice());
+            cartVo.setListPicUrl(product.getListPicUrl());
             checkedGoodsList.add(cartVo);
-        }*/
+        }
 
 
         //获取可用的优惠券信息
@@ -447,21 +449,21 @@ public class ApiCartController extends ApiBaseController {
             if (couponVo != null) {
                 couponPrice = couponVo.getType_money();
             }
-        }
+        }*/
 
         //订单的总价
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
 
         //
-        BigDecimal actualPrice = orderTotalPrice.subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
+        //BigDecimal actualPrice = orderTotalPrice.subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
 
         resultObj.put("freightPrice", freightPrice);
 
-        resultObj.put("couponPrice", couponPrice);
+        // resultObj.put("couponPrice", couponPrice);
         resultObj.put("checkedGoodsList", checkedGoodsList);
         resultObj.put("goodsTotalPrice", goodsTotalPrice);
         resultObj.put("orderTotalPrice", orderTotalPrice);
-        resultObj.put("actualPrice", actualPrice);*/
+        // resultObj.put("actualPrice", actualPrice);
         return ServiceResultHelper.genResultWithSuccess(resultObj);
     }
 

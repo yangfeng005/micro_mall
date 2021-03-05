@@ -23,7 +23,7 @@
           resultMap="CustomResultMap">
     SELECT
         p.*,
-        g.name as productName
+        g.name as goodsName
     FROM
         product p
     LEFT JOIN goods g ON p.goods_id = g.id
@@ -36,5 +36,17 @@
         </if>
     </where>
     ORDER BY p.goods_id desc
+  </select>
+
+  <select id="getById" resultMap="CustomResultMap">
+    SELECT
+        p.*,
+        g.name as goodsName,
+        g.list_pic_url as listPicUrl
+    FROM
+        product p
+    LEFT JOIN goods g ON p.goods_id = g.id
+    where
+         p.id = #{id, jdbcType=VARCHAR}
   </select>
 </mapper>
