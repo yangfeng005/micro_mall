@@ -49,7 +49,7 @@
               order by ${order}
           </when>
           <otherwise>
-              order by gs.id desc
+              order by s.sort_order
           </otherwise>
       </choose>
   </select>

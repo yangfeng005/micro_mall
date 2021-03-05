@@ -61,6 +61,7 @@ public class SpecificationService extends AbstractBaseAOService<SpecificationAO,
         if (!Objects.isNull(request) && StringUtils.isNotBlank(request.getName())) {
             c.andNameLike("%" + request.getName() + "%");
         }
+        criteria.setOrderByClause("sort_order asc");
         return selectByCriteria(criteria).getData();
     }
 

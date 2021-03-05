@@ -106,6 +106,7 @@ public class ApiGoodsController {
 
         //产品
         ProductRequest productRequest = new ProductRequest();
+        productRequest.setGoodsId(id);
         List<ProductAO> productList = productService.list(productRequest).getData();
 
         //商品轮播图
