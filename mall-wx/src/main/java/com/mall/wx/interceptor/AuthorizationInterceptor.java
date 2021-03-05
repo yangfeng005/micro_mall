@@ -7,6 +7,7 @@ import com.mall.shop.entity.customized.WxUserAO;
 import com.mall.shop.service.IWxUserService;
 import com.mall.wx.annoation.IgnoreAuth;
 import com.mall.wx.exception.ApiRRException;
+import com.mall.wx.util.TokenUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
@@ -23,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class AuthorizationInterceptor implements HandlerInterceptor {
 
-    public static final String LOGIN_TOKEN_KEY = "X-Nideshop-Token";
 
     @Resource
     private IWxUserService wxUserService;
@@ -50,20 +50,11 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        //从header中获取token
-        String token = request.getHeader(LOGIN_TOKEN_KEY);
-        //如果header中不存在token，则从参数中获取token
-        if (StringUtils.isBlank(token)) {
-            token = request.getParameter(LOGIN_TOKEN_KEY);
-        }
+        //获取token
+        String token = TokenUtil.getToken(request);
+        //从token中获取用户id
+        String userId = TokenUtil.getUserId(token);
 
-        //token为空
-        if (StringUtils.isBlank(token)) {
-            throw new ApiRRException("请先登录", 401);
-        }
-
-        //校验token
-        String userId = JWTUtil.getFieldValue(token, "userId");
         if (StringUtils.isEmpty(userId)) {
             throw new ApiRRException("token错误!");
         } else {

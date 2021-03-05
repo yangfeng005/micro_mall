@@ -1,16 +1,12 @@
 package com.mall.wx.api;
 
-import com.backstage.core.jwt.JWTUtil;
 import com.backstage.core.result.ServiceResultHelper;
 import com.backstage.system.service.IUserService;
-import com.mall.shop.dto.request.GoodsGalleryRequest;
-import com.mall.shop.dto.request.GoodsRequest;
-import com.mall.shop.dto.request.GoodsSpecificationRequest;
-import com.mall.shop.dto.request.ProductRequest;
+import com.mall.shop.dto.request.*;
 import com.mall.shop.entity.customized.*;
 import com.mall.shop.service.*;
 import com.mall.wx.annoation.IgnoreAuth;
-import com.mall.wx.interceptor.AuthorizationInterceptor;
+import com.mall.wx.util.TokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,14 +40,15 @@ public class ApiGoodsController {
      private IAttributeService attributeService;*/
     @Autowired
     private IBrandService brandService;
+    @Autowired
+    private ICollectService collectService;
     /* @Autowired
      private ICommentService commentService;*/
     @Autowired
     private IUserService userService;
     /* @Autowired
      private ICommentPictureService commentPictureService;
-     @Autowired
-     private ICollectService collectService;
+
      @Autowired
      private IFootprintService footprintService;*/
     @Autowired
@@ -76,9 +73,11 @@ public class ApiGoodsController {
             @ApiImplicitParam(name = "referrer", value = "商品referrer", paramType = "path", required = false)})
     @PostMapping(value = "detail")
     public Object detail(HttpServletRequest request, String id, Long referrer) {
+        //获取token
+        String token = TokenUtil.getToken(request);
+        //从token中获取用户id
+        String userId = TokenUtil.getUserId(token);
         Map<String, Object> resultObj = new HashMap();
-        String token = request.getHeader(AuthorizationInterceptor.LOGIN_TOKEN_KEY);
-        String userId = JWTUtil.getFieldValue(token, "userId");
         //商品
         GoodsAO good = goodsService.selectByPrimaryKey(id).getData();
 
@@ -126,7 +125,19 @@ public class ApiGoodsController {
 
         //品牌制造商
         BrandAO brand = brandService.selectByPrimaryKey(good.getBrandId()).getData();
-        //
+
+        //当前用户是否收藏
+        CollectRequest collectRequest = new CollectRequest();
+        collectRequest.setUserId(userId);
+        collectRequest.setValueId(id);
+        collectRequest.setTypeId(0);
+        List<CollectAO> collectList = collectService.listByCondition(collectRequest).getData();
+        if (!CollectionUtils.isEmpty(collectList)) {
+            resultObj.put("userHasCollect", 1);
+        } else {
+            resultObj.put("userHasCollect", 0);
+        }
+
       /*  param.put("value_id", id);
         param.put("type_id", 0);
         Integer commentCount = commentService.queryTotal(param);
@@ -146,15 +157,7 @@ public class ApiGoodsController {
         Map comment = new HashMap();
         comment.put("count", commentCount);
         comment.put("data", commentInfo);
-        //当前用户是否收藏
-        Map collectParam = new HashMap();
-        collectParam.put("user_id", getUserId());
-        collectParam.put("value_id", id);
-        collectParam.put("type_id", 0);
-        Integer userHasCollect = collectService.queryTotal(collectParam);
-        if (userHasCollect > 0) {
-            userHasCollect = 1;
-        }
+
         //记录用户的足迹
         FootprintVo footprintEntity = new FootprintVo();
         footprintEntity.setAdd_time(System.currentTimeMillis() / 1000);
