@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Description: A generated data access implementation of entity ReceiptAddress.
+                 Generated at 2021-02-20 16:00:02, do NOT modify!
+    Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
+    Version: 1.0.0.0, Feb 20, 2021
+
+-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mall.shop.dao.customized.ReceiptAddressCustomizedMapper" >
+  <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.ReceiptAddressAO" >
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="user_id" property="userId" jdbcType="VARCHAR" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="tel_number" property="telNumber" jdbcType="VARCHAR" />
+      <result column="postal_Code" property="postalCode" jdbcType="VARCHAR" />
+      <result column="national_Code" property="nationalCode" jdbcType="VARCHAR" />
+      <result column="province_Name" property="provinceName" jdbcType="VARCHAR" />
+      <result column="city_Name" property="cityName" jdbcType="VARCHAR" />
+      <result column="county_Name" property="countyName" jdbcType="VARCHAR" />
+      <result column="detail_Info" property="detailInfo" jdbcType="VARCHAR" />
+      <result column="is_default" property="isDefault" jdbcType="BIT" />
+  </resultMap>
+
+  <select id="listByCondition" parameterType="com.mall.shop.dto.request.ReceiptAddressRequest"
+          resultMap="CustomResultMap">
+    SELECT
+          *
+    FROM
+          receipt_address
+    <where>
+        <if test="userId!= null and userId != ''">
+            and user_id = #{userId}
+        </if>
+    </where>
+  </select>
+
+</mapper>
