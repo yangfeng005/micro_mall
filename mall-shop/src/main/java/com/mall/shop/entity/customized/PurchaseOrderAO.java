@@ -1,18 +1,19 @@
 package com.mall.shop.entity.customized;
 
-import java.io.Serializable;
 import com.mall.shop.entity.gen.PurchaseOrder;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+
+import java.io.Serializable;
 
 /**
  * 应用对象 - PurchaseOrder.
  * <p>
  * 该类于 2021-02-26 15:44:46 首次生成，后由开发手工维护。
  * </p>
+ *
  * @author yangfeng
  * @version 1.0.0, Feb 26, 2021
  */
@@ -23,6 +24,20 @@ public final class PurchaseOrderAO extends PurchaseOrder implements Serializable
      * 默认的序列化 id.
      */
     private static final long serialVersionUID = 1L;
+
+
+    /**
+     * 订单商品数量
+     */
+    private Integer goodsCount;
+
+    public Integer getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(Integer goodsCount) {
+        this.goodsCount = goodsCount;
+    }
 
     @Override
     public String toString() {

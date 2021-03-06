@@ -13,4 +13,10 @@ public class PurchaseOrderRequest extends BaseRequest implements Serializable {
      * 订单号
      */
     private String orderSn;
+
+
+    private String userId;
+
+
+    private String orderBy;
 }
