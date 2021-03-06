@@ -85,7 +85,7 @@ public class ProductService extends AbstractBaseAOService<ProductAO, ProductCrit
                     specificationIds.add(goodsSpecification.getSpecificationId());
                     goodsSpecificationNames.add(goodsSpecification.getValue());
                 }
-                o.setGoodsSpecificationIdList(specificationIds);
+                o.setGoodsSpecificationIdList(specificationIds);//规格id
                 o.setGoodsSpecificationName(String.join(";", goodsSpecificationNames));
             }
         }
