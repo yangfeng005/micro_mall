@@ -456,7 +456,7 @@ public class ApiCartController extends ApiBaseController {
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
 
         //
-        //BigDecimal actualPrice = orderTotalPrice.subtract(couponPrice);  //减去其它支付的金额后，要实际支付的金额
+        BigDecimal actualPrice = orderTotalPrice.subtract(null);  //减去其它支付的金额后，要实际支付的金额
 
         resultObj.put("freightPrice", freightPrice);
 
@@ -464,7 +464,7 @@ public class ApiCartController extends ApiBaseController {
         resultObj.put("checkedGoodsList", checkedGoodsList);
         resultObj.put("goodsTotalPrice", goodsTotalPrice);
         resultObj.put("orderTotalPrice", orderTotalPrice);
-        // resultObj.put("actualPrice", actualPrice);
+        resultObj.put("actualPrice", actualPrice);
         return ServiceResultHelper.genResultWithSuccess(resultObj);
     }
 
