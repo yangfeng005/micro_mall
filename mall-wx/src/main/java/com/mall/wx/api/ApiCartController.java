@@ -456,7 +456,7 @@ public class ApiCartController extends ApiBaseController {
         BigDecimal orderTotalPrice = goodsTotalPrice.add(freightPrice);
 
         //
-        BigDecimal actualPrice = orderTotalPrice.subtract(null);  //减去其它支付的金额后，要实际支付的金额
+        BigDecimal actualPrice = orderTotalPrice.subtract(new BigDecimal(0));  //减去其它支付的金额后，要实际支付的金额
 
         resultObj.put("freightPrice", freightPrice);
 
