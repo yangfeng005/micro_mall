@@ -86,9 +86,30 @@ public class ProductService extends AbstractBaseAOService<ProductAO, ProductCrit
                     goodsSpecificationNames.add(goodsSpecification.getValue());
                 }
                 o.setGoodsSpecificationIdList(specificationIds);
-                o.setGoodsSpecificationName(String.join("|", goodsSpecificationNames));
+                o.setGoodsSpecificationName(String.join(";", goodsSpecificationNames));
             }
         }
+    }
+
+    /**
+     * 获取商品规格名称
+     *
+     * @param goodsSpecificationIds
+     * @return
+     */
+    @Override
+    public String goodsSpecificationName(String goodsSpecificationIds) {
+        List<String> goodsSpecificationNames = new ArrayList();
+        if (!StringUtils.isEmpty(goodsSpecificationIds)) {
+            String[] goodsSpecificationIdArray = goodsSpecificationIds.split("_");
+            if (!Objects.isNull(goodsSpecificationIdArray) && goodsSpecificationIdArray.length > 0) {
+                for (String id : goodsSpecificationIdArray) {
+                    GoodsSpecificationAO goodsSpecification = goodsSpecificationService.selectByPrimaryKey(id).getData();
+                    goodsSpecificationNames.add(goodsSpecification.getValue());
+                }
+            }
+        }
+        return String.join(";", goodsSpecificationNames);
     }
 
     /**

@@ -26,4 +26,12 @@ public interface IProductService extends IBaseAOService<ProductAO, ProductCriter
      * @return
      */
     ServiceResult<ProductAO> getById(String productId);
+
+    /**
+     * 获取商品规格名称
+     *
+     * @param goodsSpecificationIds
+     * @return
+     */
+    String goodsSpecificationName(String goodsSpecificationIds);
 }

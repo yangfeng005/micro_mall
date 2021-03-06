@@ -433,12 +433,13 @@ public class ApiCartController extends ApiBaseController {
             //商品总价
             goodsTotalPrice = product.getRetailPrice().multiply(new BigDecimal(number));
 
-            CartAO cartVo = new CartAO();
-            cartVo.setGoodsName(product.getGoodsName());
-            cartVo.setNumber(number);
-            cartVo.setRetailPrice(product.getRetailPrice());
-            cartVo.setListPicUrl(product.getListPicUrl());
-            checkedGoodsList.add(cartVo);
+            CartAO cart = new CartAO();
+            cart.setGoodsName(product.getGoodsName());
+            cart.setNumber(number);
+            cart.setRetailPrice(product.getRetailPrice());
+            cart.setListPicUrl(product.getListPicUrl());
+            cart.setGoodsSpecifitionNameValue(productService.goodsSpecificationName(product.getGoodsSpecificationIds()));
+            checkedGoodsList.add(cart);
         }
 
 
