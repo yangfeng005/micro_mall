@@ -14,5 +14,5 @@ public interface IRegionService extends IBaseAOService<RegionAO, RegionCriteria>
 
     ServiceResult<List<RegionAO>> listByCondition(RegionRequest request);
 
-    ServiceResult<List<RegionAO>> listChildrenByParentCode(String parentCode);
+    ServiceResult<List<RegionAO>> listChildrenByParentId(String parentId);
 }

@@ -11,6 +11,6 @@ public interface RegionCustomizedMapper {
     List<RegionAO> listByCondition(RegionRequest request);
 
 
-    List<RegionAO> listChildrenByParentCode(String parentCode);
+    List<RegionAO> listChildrenByParentId(String parentId);
 
 }

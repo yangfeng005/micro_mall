@@ -62,8 +62,8 @@ public class RegionService extends AbstractBaseAOService<RegionAO, RegionCriteri
     }
 
     @Override
-    public ServiceResult<List<RegionAO>> listChildrenByParentCode(String parentCode) {
-        return ServiceResultHelper.genResultWithSuccess(regionCustomizedMapper.listChildrenByParentCode(parentCode));
+    public ServiceResult<List<RegionAO>> listChildrenByParentId(String parentId) {
+        return ServiceResultHelper.genResultWithSuccess(regionCustomizedMapper.listChildrenByParentId(parentId));
     }
 
 }

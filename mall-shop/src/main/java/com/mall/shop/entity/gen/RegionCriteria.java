@@ -283,73 +283,73 @@ public class RegionCriteria implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andCodeIsNull() {
-            addCriterion("code is null");
+        public Criteria andParentIdIsNull() {
+            addCriterion("parent_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCodeIsNotNull() {
-            addCriterion("code is not null");
+        public Criteria andParentIdIsNotNull() {
+            addCriterion("parent_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCodeEqualTo(String value) {
-            addCriterion("code =", value, "code");
+        public Criteria andParentIdEqualTo(String value) {
+            addCriterion("parent_id =", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotEqualTo(String value) {
-            addCriterion("code <>", value, "code");
+        public Criteria andParentIdNotEqualTo(String value) {
+            addCriterion("parent_id <>", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThan(String value) {
-            addCriterion("code >", value, "code");
+        public Criteria andParentIdGreaterThan(String value) {
+            addCriterion("parent_id >", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("code >=", value, "code");
+        public Criteria andParentIdGreaterThanOrEqualTo(String value) {
+            addCriterion("parent_id >=", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThan(String value) {
-            addCriterion("code <", value, "code");
+        public Criteria andParentIdLessThan(String value) {
+            addCriterion("parent_id <", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLessThanOrEqualTo(String value) {
-            addCriterion("code <=", value, "code");
+        public Criteria andParentIdLessThanOrEqualTo(String value) {
+            addCriterion("parent_id <=", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeLike(String value) {
-            addCriterion("code like", value, "code");
+        public Criteria andParentIdLike(String value) {
+            addCriterion("parent_id like", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotLike(String value) {
-            addCriterion("code not like", value, "code");
+        public Criteria andParentIdNotLike(String value) {
+            addCriterion("parent_id not like", value, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeIn(List<String> values) {
-            addCriterion("code in", values, "code");
+        public Criteria andParentIdIn(List<String> values) {
+            addCriterion("parent_id in", values, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotIn(List<String> values) {
-            addCriterion("code not in", values, "code");
+        public Criteria andParentIdNotIn(List<String> values) {
+            addCriterion("parent_id not in", values, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeBetween(String value1, String value2) {
-            addCriterion("code between", value1, value2, "code");
+        public Criteria andParentIdBetween(String value1, String value2) {
+            addCriterion("parent_id between", value1, value2, "parentId");
             return (Criteria) this;
         }
 
-        public Criteria andCodeNotBetween(String value1, String value2) {
-            addCriterion("code not between", value1, value2, "code");
+        public Criteria andParentIdNotBetween(String value1, String value2) {
+            addCriterion("parent_id not between", value1, value2, "parentId");
             return (Criteria) this;
         }
 
@@ -423,73 +423,123 @@ public class RegionCriteria implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeIsNull() {
-            addCriterion("parent_code is null");
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeIsNotNull() {
-            addCriterion("parent_code is not null");
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeEqualTo(String value) {
-            addCriterion("parent_code =", value, "parentCode");
+        public Criteria andTypeEqualTo(Integer value) {
+            addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeNotEqualTo(String value) {
-            addCriterion("parent_code <>", value, "parentCode");
+        public Criteria andTypeNotEqualTo(Integer value) {
+            addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeGreaterThan(String value) {
-            addCriterion("parent_code >", value, "parentCode");
+        public Criteria andTypeGreaterThan(Integer value) {
+            addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("parent_code >=", value, "parentCode");
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeLessThan(String value) {
-            addCriterion("parent_code <", value, "parentCode");
+        public Criteria andTypeLessThan(Integer value) {
+            addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeLessThanOrEqualTo(String value) {
-            addCriterion("parent_code <=", value, "parentCode");
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeLike(String value) {
-            addCriterion("parent_code like", value, "parentCode");
+        public Criteria andTypeIn(List<Integer> values) {
+            addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeNotLike(String value) {
-            addCriterion("parent_code not like", value, "parentCode");
+        public Criteria andTypeNotIn(List<Integer> values) {
+            addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeIn(List<String> values) {
-            addCriterion("parent_code in", values, "parentCode");
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
+            addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeNotIn(List<String> values) {
-            addCriterion("parent_code not in", values, "parentCode");
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeBetween(String value1, String value2) {
-            addCriterion("parent_code between", value1, value2, "parentCode");
+        public Criteria andAgencyIdIsNull() {
+            addCriterion("agency_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andParentCodeNotBetween(String value1, String value2) {
-            addCriterion("parent_code not between", value1, value2, "parentCode");
+        public Criteria andAgencyIdIsNotNull() {
+            addCriterion("agency_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdEqualTo(Integer value) {
+            addCriterion("agency_id =", value, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdNotEqualTo(Integer value) {
+            addCriterion("agency_id <>", value, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdGreaterThan(Integer value) {
+            addCriterion("agency_id >", value, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("agency_id >=", value, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdLessThan(Integer value) {
+            addCriterion("agency_id <", value, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdLessThanOrEqualTo(Integer value) {
+            addCriterion("agency_id <=", value, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdIn(List<Integer> values) {
+            addCriterion("agency_id in", values, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdNotIn(List<Integer> values) {
+            addCriterion("agency_id not in", values, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdBetween(Integer value1, Integer value2) {
+            addCriterion("agency_id between", value1, value2, "agencyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAgencyIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("agency_id not between", value1, value2, "agencyId");
             return (Criteria) this;
         }
     }

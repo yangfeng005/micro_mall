@@ -1,6 +1,5 @@
 package com.mall.wx.api;
 
-import com.backstage.core.result.ServiceResultHelper;
 import com.mall.shop.service.IRegionService;
 import com.mall.wx.annoation.IgnoreAuth;
 import io.swagger.annotations.Api;
@@ -9,18 +8,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @Api(tags = "地区")
 @RestController
 @RequestMapping("/api/region")
 public class ApiRegionController extends ApiBaseController {
 
+    @Resource
     private IRegionService regionService;
 
-    @ApiOperation(value = "地区列表")
+    @ApiOperation(value = "根据父级id查询子级")
     @IgnoreAuth
     @PostMapping("list")
-    public Object list(String parentCode) {
-        return ServiceResultHelper.genResultWithSuccess(regionService.listChildrenByParentCode(parentCode).getData());
+    public Object list(String parentId) {
+        return regionService.listChildrenByParentId(parentId);
     }
 
    /* @IgnoreAuth
