@@ -10,13 +10,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mall.shop.dao.customized.ProductCustomizedMapper" >
   <resultMap id="CustomResultMap" type="com.mall.shop.entity.customized.ProductAO" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
-    <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
-    <result column="goods_number" property="goodsNumber" jdbcType="VARCHAR" />
-    <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
-    <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
-    <result column="goods_specification_ids" property="goodsSpecificationIds" jdbcType="LONGVARCHAR" />
+      <id column="id" property="id" jdbcType="VARCHAR" />
+      <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+      <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
+      <result column="goods_number" property="goodsNumber" jdbcType="INTEGER" />
+      <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
+      <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
+      <result column="goods_specification_ids" property="goodsSpecificationIds" jdbcType="LONGVARCHAR" />
   </resultMap>
 
   <select id="listByCondition" parameterType="com.mall.shop.dto.request.ProductRequest"

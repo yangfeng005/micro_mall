@@ -31,7 +31,7 @@ public class OrderGoodsController {
     @PostMapping(value = "/orderGoods/list")
     @LogOperation(action = "查询订单商品")
     public Object list(OrderGoodsRequest request) {
-        return orderGoodsService.list(request);
+        return orderGoodsService.listByCondition(request);
     }
 
 }

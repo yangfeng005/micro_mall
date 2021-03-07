@@ -56,7 +56,7 @@
 
 
 
-        <table tableName="region" domainObjectName="Region">
+        <table tableName="product" domainObjectName="Product">
             <generatedKey column="ID" sqlStatement="select uuid_short()" identity="false" />
             <columnOverride column="ID" property="id" javaType="String" />
         </table>

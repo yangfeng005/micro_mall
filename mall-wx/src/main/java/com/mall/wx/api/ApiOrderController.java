@@ -41,12 +41,12 @@ public class ApiOrderController extends ApiBaseController {
         String userId = TokenUtil.getUserId(token);
         orderRequest.setUserId(userId);
         orderRequest.setOrderBy("add_time");
-        List<PurchaseOrderAO> orderList = purchaseOrderService.list(orderRequest).getData();
+        List<PurchaseOrderAO> orderList = purchaseOrderService.listByCondition(orderRequest).getData();
         for (PurchaseOrderAO item : orderList) {
             OrderGoodsRequest orderGoodsRequest = new OrderGoodsRequest();
             orderGoodsRequest.setOrderId(item.getId());
             //订单的商品
-            List<OrderGoodsAO> goodsList = orderGoodsService.list(orderGoodsRequest).getData();
+            List<OrderGoodsAO> goodsList = orderGoodsService.listByCondition(orderGoodsRequest).getData();
             Integer goodsCount = 0;
             for (OrderGoodsAO orderGoods : goodsList) {
                 goodsCount += orderGoods.getNumber();
@@ -70,7 +70,7 @@ public class ApiOrderController extends ApiBaseController {
         OrderGoodsRequest orderGoodsRequest = new OrderGoodsRequest();
         orderGoodsRequest.setOrderId(orderId);
         //订单的商品
-        List<OrderGoodsAO> orderGoods = orderGoodsService.list(orderGoodsRequest).getData();
+        List<OrderGoodsAO> orderGoods = orderGoodsService.listByCondition(orderGoodsRequest).getData();
         //订单最后支付时间
         if (order.getOrderStatus() == 0) {
             // if (moment().subtract(60, 'minutes') < moment(orderInfo.add_time)) {
@@ -121,6 +121,9 @@ public class ApiOrderController extends ApiBaseController {
     public Object submit(@LoginUser UserVo loginUser) {
         Map resultObj = null;
         try {
+         String token = TokenUtil.getToken(request);
+        //从token中获取用户id
+        String userId = TokenUtil.getUserId(token);
             resultObj = purchaseOrderService.submit(getJsonRequest(), loginUser);
             if (null != resultObj) {
                 return toResponsObject(MapUtils.getInteger(resultObj, "errno"), MapUtils.getString(resultObj, "errmsg"), resultObj.get("data"));

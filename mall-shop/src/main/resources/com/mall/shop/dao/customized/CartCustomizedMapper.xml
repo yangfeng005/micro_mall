@@ -21,19 +21,63 @@
       <result column="number" property="number" jdbcType="INTEGER" />
       <result column="checked" property="checked" jdbcType="BIT" />
       <result column="list_pic_url" property="listPicUrl" jdbcType="VARCHAR" />
+      <result column="goods_specifition_name_value" property="goodsSpecifitionNameValue" jdbcType="LONGVARCHAR" />
+      <result column="goods_specifition_ids" property="goodsSpecifitionIds" jdbcType="LONGVARCHAR" />
   </resultMap>
 
   <select id="listByCondition" parameterType="com.mall.shop.dto.request.CartRequest"
           resultMap="CustomResultMap">
     SELECT
-          *
+          a.*,
+          b.list_pic_url as listPicUrl,
+          c.retail_price as retailProductPrice
     FROM
-         cart
+         cart a
+    left join goods b on a.goods_id = b.id
+    left join product c on c.goods_id = a.goods_id and c.id = a.product_id
     <where>
         <if test="userId!= null and userId != ''">
-            and user_id = #{userId}
+            and a.user_id = #{userId}
+        </if>
+        <if test="productId!= null and productId != ''">
+            and a.product_id = #{productId}
+        </if>
+        <if test="goodsId!= null and goodsId != ''">
+            and a.goods_id = #{goodsId}
+        </if>
+        <if test="checked">
+            and a.checked = #{checked}
         </if>
     </where>
   </select>
 
+    <delete id="deleteByCondition" parameterType="com.mall.shop.dto.request.CartRequest">
+        DELETE
+        FROM
+             cart
+        <where>
+            <if test="productIds!= null and productIds.size >0 ">
+               AND product_id in
+                <foreach item="id" collection="productIds" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+            <if test="userId!= null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="checked">
+                and checked = #{checked}
+            </if>
+        </where>
+    </delete>
+
+    <update id="updateCheck">
+        update cart
+        set `checked` = #{checked}
+        where product_id in
+        <foreach item="productId" collection="productIds" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+        and user_id = #{userId}
+    </update>
 </mapper>

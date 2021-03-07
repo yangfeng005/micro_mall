@@ -108,7 +108,7 @@ public class PurchaseOrderController {
     @RequiresPermissions(value = {"order:view", "order:manage"}, logical = Logical.OR)
     @LogOperation(action = "查询所有订单")
     public Object listAll(PurchaseOrderRequest request) {
-        return purchaseOrderService.listAll(request);
+        return purchaseOrderService.listByCondition(request);
     }
 
     /**

@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface IOrderGoodsService extends IBaseAOService<OrderGoodsAO, OrderGoodsCriteria> {
 
-    ServiceResult<List<OrderGoodsAO>> list(OrderGoodsRequest request);
+    ServiceResult<List<OrderGoodsAO>> listByCondition(OrderGoodsRequest request);
+
 
 }

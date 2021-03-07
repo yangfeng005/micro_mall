@@ -7,13 +7,17 @@ import com.mall.shop.entity.customized.PurchaseOrderAO;
 import com.mall.shop.entity.gen.PurchaseOrderCriteria;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IPurchaseOrderService extends IBaseAOService<PurchaseOrderAO, PurchaseOrderCriteria> {
 
     ServiceResult<List<PurchaseOrderAO>> list(PurchaseOrderRequest request);
 
-    ServiceResult<List<PurchaseOrderAO>> listAll(PurchaseOrderRequest request);
+    ServiceResult<List<PurchaseOrderAO>> listByCondition(PurchaseOrderRequest request);
 
     ServiceResult<Boolean> sendGoods(PurchaseOrderAO order);
+
+    Map<String, Object> submit(String userId, String addressId, String couponId,
+                               String productId, Integer number, String type);
 
 }

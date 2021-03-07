@@ -2,9 +2,9 @@
 <!--
 
     Description: A generated data access implementation of entity Product.
-                 Generated at 2021-02-22 10:36:23, do NOT modify!
+                 Generated at 2021-03-06 22:36:36, do NOT modify!
     Author: <a href="mailto:DL88250@gmail.com">Liang Ding</a>
-    Version: 1.0.0.0, Feb 22, 2021
+    Version: 1.0.0.0, Mar 06, 2021
 
 -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
@@ -17,7 +17,7 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
     <result column="goods_sn" property="goodsSn" jdbcType="VARCHAR" />
-    <result column="goods_number" property="goodsNumber" jdbcType="VARCHAR" />
+    <result column="goods_number" property="goodsNumber" jdbcType="INTEGER" />
     <result column="retail_price" property="retailPrice" jdbcType="DECIMAL" />
     <result column="market_price" property="marketPrice" jdbcType="DECIMAL" />
   </resultMap>
@@ -188,7 +188,7 @@
       goods_number, retail_price, market_price, 
       goods_specification_ids)
     values (#{id,jdbcType=VARCHAR}, #{goodsId,jdbcType=VARCHAR}, #{goodsSn,jdbcType=VARCHAR}, 
-      #{goodsNumber,jdbcType=VARCHAR}, #{retailPrice,jdbcType=DECIMAL}, #{marketPrice,jdbcType=DECIMAL}, 
+      #{goodsNumber,jdbcType=INTEGER}, #{retailPrice,jdbcType=DECIMAL}, #{marketPrice,jdbcType=DECIMAL}, 
       #{goodsSpecificationIds,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mall.shop.entity.customized.ProductAO" >
@@ -230,7 +230,7 @@
         #{goodsSn,jdbcType=VARCHAR},
       </if>
       <if test="goodsNumber != null" >
-        #{goodsNumber,jdbcType=VARCHAR},
+        #{goodsNumber,jdbcType=INTEGER},
       </if>
       <if test="retailPrice != null" >
         #{retailPrice,jdbcType=DECIMAL},
@@ -270,7 +270,7 @@
         goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
       </if>
       <if test="record.goodsNumber != null" >
-        goods_number = #{record.goodsNumber,jdbcType=VARCHAR},
+        goods_number = #{record.goodsNumber,jdbcType=INTEGER},
       </if>
       <if test="record.retailPrice != null" >
         retail_price = #{record.retailPrice,jdbcType=DECIMAL},
@@ -295,7 +295,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       goods_id = #{record.goodsId,jdbcType=VARCHAR},
       goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
-      goods_number = #{record.goodsNumber,jdbcType=VARCHAR},
+      goods_number = #{record.goodsNumber,jdbcType=INTEGER},
       retail_price = #{record.retailPrice,jdbcType=DECIMAL},
       market_price = #{record.marketPrice,jdbcType=DECIMAL},
       goods_specification_ids = #{record.goodsSpecificationIds,jdbcType=LONGVARCHAR}
@@ -312,7 +312,7 @@
     set id = #{record.id,jdbcType=VARCHAR},
       goods_id = #{record.goodsId,jdbcType=VARCHAR},
       goods_sn = #{record.goodsSn,jdbcType=VARCHAR},
-      goods_number = #{record.goodsNumber,jdbcType=VARCHAR},
+      goods_number = #{record.goodsNumber,jdbcType=INTEGER},
       retail_price = #{record.retailPrice,jdbcType=DECIMAL},
       market_price = #{record.marketPrice,jdbcType=DECIMAL}
     <if test="_parameter != null" >
@@ -333,7 +333,7 @@
         goods_sn = #{goodsSn,jdbcType=VARCHAR},
       </if>
       <if test="goodsNumber != null" >
-        goods_number = #{goodsNumber,jdbcType=VARCHAR},
+        goods_number = #{goodsNumber,jdbcType=INTEGER},
       </if>
       <if test="retailPrice != null" >
         retail_price = #{retailPrice,jdbcType=DECIMAL},
@@ -355,7 +355,7 @@
     update product
     set goods_id = #{goodsId,jdbcType=VARCHAR},
       goods_sn = #{goodsSn,jdbcType=VARCHAR},
-      goods_number = #{goodsNumber,jdbcType=VARCHAR},
+      goods_number = #{goodsNumber,jdbcType=INTEGER},
       retail_price = #{retailPrice,jdbcType=DECIMAL},
       market_price = #{marketPrice,jdbcType=DECIMAL},
       goods_specification_ids = #{goodsSpecificationIds,jdbcType=LONGVARCHAR}
@@ -369,7 +369,7 @@
     update product
     set goods_id = #{goodsId,jdbcType=VARCHAR},
       goods_sn = #{goodsSn,jdbcType=VARCHAR},
-      goods_number = #{goodsNumber,jdbcType=VARCHAR},
+      goods_number = #{goodsNumber,jdbcType=INTEGER},
       retail_price = #{retailPrice,jdbcType=DECIMAL},
       market_price = #{marketPrice,jdbcType=DECIMAL}
     where id = #{id,jdbcType=VARCHAR}

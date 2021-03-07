@@ -5,6 +5,7 @@ import com.backstage.core.request.BaseRequest;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class GoodsSpecificationRequest extends BaseRequest implements Serializable {
@@ -28,4 +29,7 @@ public class GoodsSpecificationRequest extends BaseRequest implements Serializab
 
 
     private String order;
+
+
+    private List<String> ids;
 }

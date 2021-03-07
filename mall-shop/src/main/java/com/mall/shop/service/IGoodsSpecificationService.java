@@ -4,6 +4,7 @@ import com.backstage.core.result.ServiceResult;
 import com.backstage.core.service.IBaseAOService;
 import com.mall.shop.dto.request.GoodsSpecificationRequest;
 import com.mall.shop.entity.customized.GoodsSpecificationAO;
+import com.mall.shop.entity.customized.ProductAO;
 import com.mall.shop.entity.gen.GoodsSpecificationCriteria;
 
 import java.util.List;
@@ -32,5 +33,14 @@ public interface IGoodsSpecificationService extends IBaseAOService<GoodsSpecific
      * @return
      */
     ServiceResult<Map<String, List<GoodsSpecificationAO>>> listGoodsSpecification(String goodsId);
+
+    /**
+     * 获取商品规格
+     *
+     * @param product
+     * @param goodsId
+     * @return
+     */
+    ServiceResult<List<String>> getGoodsSepcifitionValues(ProductAO product, String goodsId);
 
 }

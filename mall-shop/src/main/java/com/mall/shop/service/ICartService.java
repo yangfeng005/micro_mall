@@ -13,4 +13,17 @@ public interface ICartService extends IBaseAOService<CartAO, CartCriteria> {
     ServiceResult<List<CartAO>> list(CartRequest request);
 
     ServiceResult<List<CartAO>> listByCondition(CartRequest request);
+
+    ServiceResult<Integer> deleteByCondition(CartRequest request);
+
+
+    /**
+     * 勾选后者取消勾选
+     *
+     * @param productIds
+     * @param checked
+     * @param userId
+     * @return
+     */
+    ServiceResult<Boolean> updateCheck(List<String> productIds, Boolean checked, String userId);
 }

@@ -11,14 +11,15 @@ import com.mall.shop.dao.customized.GoodsSpecificationCustomizedMapper;
 import com.mall.shop.dao.gen.GoodsSpecificationGeneratedMapper;
 import com.mall.shop.dto.request.GoodsSpecificationRequest;
 import com.mall.shop.entity.customized.GoodsSpecificationAO;
+import com.mall.shop.entity.customized.ProductAO;
 import com.mall.shop.entity.gen.GoodsSpecificationCriteria;
 import com.mall.shop.service.IGoodsSpecificationService;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -92,6 +93,28 @@ public class GoodsSpecificationService extends AbstractBaseAOService<GoodsSpecif
                 .collect(Collectors.groupingBy(GoodsSpecificationAO::getSpecificationId,
                         LinkedHashMap::new, Collectors.toList()));
         return ServiceResultHelper.genResultWithSuccess(specificationMap);
+    }
+
+    /**
+     * 获取商品规格
+     *
+     * @param product
+     * @param goodsId
+     * @return
+     */
+    @Override
+    public ServiceResult<List<String>> getGoodsSepcifitionValues(ProductAO product, String goodsId) {
+        List<String> goodsSepcifitionValues = new ArrayList<>();
+        if (StringUtils.isNotEmpty(product.getGoodsSpecificationIds())) {
+            GoodsSpecificationRequest goodsSpecificationRequest = new GoodsSpecificationRequest();
+            goodsSpecificationRequest.setGoodsId(goodsId);
+            goodsSpecificationRequest.setIds(Arrays.asList(product.getGoodsSpecificationIds().split("_")));
+            List<GoodsSpecificationAO> specificationList = listByCondition(goodsSpecificationRequest).getData();
+            if (!CollectionUtils.isEmpty(specificationList)) {
+                specificationList.stream().forEach(o -> goodsSepcifitionValues.add(o.getValue()));
+            }
+        }
+        return ServiceResultHelper.genResultWithSuccess(goodsSepcifitionValues);
     }
 }
 

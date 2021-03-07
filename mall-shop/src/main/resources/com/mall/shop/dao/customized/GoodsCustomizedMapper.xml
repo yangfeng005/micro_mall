@@ -83,13 +83,13 @@
         <if test="isOnSale">
             and g.is_on_sale = #{isOnSale}
         </if>
-        <if test="categoryIds != null">
+        <if test="categoryIds != null and categoryIds.size()>0">
             and g.category_id in
             <foreach item="item" collection="categoryIds" open="(" separator="," close=")">
               #{item}
             </foreach>
         </if>
-        <if test="goodsIds != null">
+        <if test="goodsIds != null and goodsIds.size()>0">
             and g.id in
             <foreach item="item" collection="goodsIds" open="(" separator="," close=")">
               #{item}

@@ -48,7 +48,7 @@
           <if test="notName != null and notName != null">
               and a1.name &lt;&gt; #{notName}
           </if>
-          <if test="ids != null">
+          <if test="ids != null and ids.size()>0">
               and a1.id in
               <foreach item="item" collection="ids" open="(" separator="," close=")">
                   #{item}
