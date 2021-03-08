@@ -12,7 +12,7 @@ public class ProductRequest extends BaseRequest implements Serializable {
     /**
      * 商品名称
      */
-    private String productName;
+    private String goodsName;
 
     /**
      * 商品id

@@ -28,8 +28,8 @@
         product p
     LEFT JOIN goods g ON p.goods_id = g.id
     <where>
-        <if test="productName != null and productName != ''">
-            AND g.name LIKE CONCAT('%', #{productName, jdbcType=VARCHAR},'%')
+        <if test="goodsName != null and goodsName != ''">
+            AND g.name LIKE CONCAT('%', #{goodsName, jdbcType=VARCHAR},'%')
         </if>
         <if test="goodsId != null and goodsId != ''">
             AND p.goods_id = #{goodsId, jdbcType=VARCHAR}
