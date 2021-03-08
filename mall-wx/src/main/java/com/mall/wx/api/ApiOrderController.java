@@ -1,6 +1,10 @@
 package com.mall.wx.api;
 
+import com.backstage.common.page.Page;
+import com.backstage.core.result.ServiceResult;
 import com.backstage.core.result.ServiceResultHelper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mall.shop.dto.request.OrderGoodsRequest;
 import com.mall.shop.dto.request.PurchaseOrderRequest;
 import com.mall.shop.entity.customized.OrderGoodsAO;
@@ -38,10 +42,12 @@ public class ApiOrderController extends ApiBaseController {
     @ApiOperation(value = "获取订单列表")
     @PostMapping("list")
     public Object list(PurchaseOrderRequest orderRequest) {
+        ServiceResult<List<PurchaseOrderAO>> ret = new ServiceResult();
         String token = TokenUtil.getToken(request);
         String userId = TokenUtil.getUserId(token);
         orderRequest.setUserId(userId);
         orderRequest.setOrderBy("add_time");
+        PageHelper.startPage(orderRequest.getPageNo(), orderRequest.getPageSize());
         List<PurchaseOrderAO> orderList = purchaseOrderService.listByCondition(orderRequest).getData();
         for (PurchaseOrderAO item : orderList) {
             OrderGoodsRequest orderGoodsRequest = new OrderGoodsRequest();
@@ -54,7 +60,10 @@ public class ApiOrderController extends ApiBaseController {
                 item.setGoodsCount(goodsCount);
             }
         }
-        return ServiceResultHelper.genResultWithSuccess(orderList);
+        ret.setData(orderList);
+        ret.setSucceed(true);
+        ret.setAdditionalProperties("page", Page.obtainPage(new PageInfo(orderList)));
+        return ret;
     }
 
     /**
@@ -62,7 +71,7 @@ public class ApiOrderController extends ApiBaseController {
      */
     @ApiOperation(value = "获取订单详情")
     @PostMapping("detail")
-    public Object detail(String orderId) {
+    public Object detail(@RequestParam String orderId) {
         Map resultObj = new HashMap();
         PurchaseOrderAO order = purchaseOrderService.selectByPrimaryKey(orderId).getData();
         if (Objects.isNull(order)) {
@@ -97,7 +106,7 @@ public class ApiOrderController extends ApiBaseController {
 
     @ApiOperation(value = "修改订单")
     @PostMapping("updateSuccess")
-    public Object updateSuccess(String orderId) {
+    public Object updateSuccess(@RequestParam String orderId) {
         PurchaseOrderAO order = purchaseOrderService.selectByPrimaryKey(orderId).getData();
         if (order == null) {
             return ServiceResultHelper.genResultWithFaild("订单不存在", -1);
@@ -132,7 +141,7 @@ public class ApiOrderController extends ApiBaseController {
      */
     @ApiOperation(value = "取消订单")
     @PostMapping("cancelOrder")
-    public Object cancelOrder(String orderId) {
+    public Object cancelOrder(@RequestParam String orderId) {
         try {
             PurchaseOrderAO order = purchaseOrderService.selectByPrimaryKey(orderId).getData();
             if (order.getOrderStatus() == 300) {
@@ -171,7 +180,7 @@ public class ApiOrderController extends ApiBaseController {
      */
     @ApiOperation(value = "确认收货")
     @PostMapping("confirmOrder")
-    public Object confirmOrder(String orderId) {
+    public Object confirmOrder(@RequestParam String orderId) {
         try {
             PurchaseOrderAO orderVo = purchaseOrderService.selectByPrimaryKey(orderId).getData();
             orderVo.setOrderStatus(301);
