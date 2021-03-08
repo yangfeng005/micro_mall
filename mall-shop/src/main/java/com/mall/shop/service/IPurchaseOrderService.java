@@ -7,7 +7,6 @@ import com.mall.shop.entity.customized.PurchaseOrderAO;
 import com.mall.shop.entity.gen.PurchaseOrderCriteria;
 
 import java.util.List;
-import java.util.Map;
 
 public interface IPurchaseOrderService extends IBaseAOService<PurchaseOrderAO, PurchaseOrderCriteria> {
 
@@ -17,7 +16,7 @@ public interface IPurchaseOrderService extends IBaseAOService<PurchaseOrderAO, P
 
     ServiceResult<Boolean> sendGoods(PurchaseOrderAO order);
 
-    Map<String, Object> submit(String userId, String addressId, String couponId,
-                               String productId, Integer number, String type);
+    ServiceResult submit(String userId, String addressId, String couponId,
+                         String productId, Integer number, String type);
 
 }

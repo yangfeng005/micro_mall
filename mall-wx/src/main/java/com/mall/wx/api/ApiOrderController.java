@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
@@ -116,23 +117,15 @@ public class ApiOrderController extends ApiBaseController {
     /**
      * 获取订单列表
      */
-   /* @ApiOperation(value = "订单提交")
+    @ApiOperation(value = "订单提交")
     @PostMapping("submit")
-    public Object submit(@LoginUser UserVo loginUser) {
-        Map resultObj = null;
-        try {
-         String token = TokenUtil.getToken(request);
+    public Object submit(@RequestParam String addressId, String couponId,
+                         String productId, Integer number, @RequestParam String type) {
+        String token = TokenUtil.getToken(request);
         //从token中获取用户id
         String userId = TokenUtil.getUserId(token);
-            resultObj = purchaseOrderService.submit(getJsonRequest(), loginUser);
-            if (null != resultObj) {
-                return toResponsObject(MapUtils.getInteger(resultObj, "errno"), MapUtils.getString(resultObj, "errmsg"), resultObj.get("data"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return toResponsFail("提交失败");
-    }*/
+        return purchaseOrderService.submit(userId, addressId, couponId, productId, number, type);
+    }
 
     /**
      * 获取订单列表

@@ -15,6 +15,7 @@ import com.mall.shop.entity.customized.*;
 import com.mall.shop.entity.gen.PurchaseOrderCriteria;
 import com.mall.shop.service.*;
 import com.mall.shop.util.OrderNoUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,34 +101,34 @@ public class PurchaseOrderService extends AbstractBaseAOService<PurchaseOrderAO,
 
     @Transactional
     @Override
-    public Map<String, Object> submit(String userId, String addressId, String couponId,
-                                      String productId, Integer number, String type) {
-        Map<String, Object> resultObj = new HashMap<>();
+    public ServiceResult submit(String userId, String addressId, String couponId,
+                                String productId, Integer number, String type) {
         //收货地址
         ReceiptAddressAO address = receiptAddressService.selectByPrimaryKey(addressId).getData();
 
-
         Integer freightPrice = 0;
 
-        // * 获取要购买的商品
+        //获取要购买的商品
         List<CartAO> checkedGoodsList = new ArrayList<>();
-        BigDecimal goodsTotalPrice;
+        BigDecimal goodsTotalPrice = new BigDecimal(0.00);
+        //购物车下单
         if (type.equals("cart")) {
             CartRequest cartRequest = new CartRequest();
             cartRequest.setUserId(userId);
+            cartRequest.setChecked(true);
             checkedGoodsList = cartService.listByCondition(cartRequest).getData();
             if (null == checkedGoodsList) {
-                resultObj.put("errno", 400);
-                resultObj.put("errmsg", "请选择商品");
-                return resultObj;
+                return ServiceResultHelper.genResultWithFaild("请选择商品", -1);
             }
             //统计商品总价
-            goodsTotalPrice = new BigDecimal(0.00);
             for (CartAO cartItem : checkedGoodsList) {
                 goodsTotalPrice = goodsTotalPrice.add(cartItem.getRetailPrice().multiply(new BigDecimal(cartItem.getNumber())));
             }
-        } else {
-            ProductAO product = productService.selectByPrimaryKey(productId).getData();
+        } else {//普通购买
+            if (StringUtils.isEmpty(productId)) {
+                return ServiceResultHelper.genResultWithFaild("请选择商品", -1);
+            }
+            ProductAO product = productService.getById(productId).getData();
             //计算订单的费用
             //商品总价
             goodsTotalPrice = product.getRetailPrice().multiply(new BigDecimal(number));
@@ -155,9 +156,6 @@ public class PurchaseOrderService extends AbstractBaseAOService<PurchaseOrderAO,
 
         BigDecimal actualPrice = orderTotalPrice.subtract(new BigDecimal(0));  //减去其它支付的金额后，要实际支付的金额
 
-        Long currentTime = System.currentTimeMillis() / 1000;
-
-        //
         PurchaseOrderAO order = new PurchaseOrderAO();
         order.setOrderSn(OrderNoUtil.getInstance().generateOrder());//生成订单号
         order.setUserId(userId);
@@ -195,9 +193,7 @@ public class PurchaseOrderService extends AbstractBaseAOService<PurchaseOrderAO,
         //开启事务，插入订单信息和订单商品
         insert(order);
         if (null == order.getId()) {
-            resultObj.put("errno", 1);
-            resultObj.put("errmsg", "订单提交失败");
-            return resultObj;
+            return ServiceResultHelper.genResultWithFaild("订单提交失败", -1);
         }
         //统计商品总价
         List<OrderGoodsAO> orderGoodsData = new ArrayList<>();
@@ -219,21 +215,19 @@ public class PurchaseOrderService extends AbstractBaseAOService<PurchaseOrderAO,
         }
 
         //清空已购买的商品
-        //cartService.deleteByCart(userId, 1, 1);
-        resultObj.put("errno", 0);
-        resultObj.put("errmsg", "订单提交成功");
-        //
+        CartRequest cartRequest = new CartRequest();
+        cartRequest.setUserId(userId);
+        cartRequest.setChecked(true);
+        cartService.deleteByCondition(cartRequest);
         Map<String, PurchaseOrderAO> orderMap = new HashMap<>();
         orderMap.put("order", order);
-        //
-        resultObj.put("data", orderMap);
         // 优惠券标记已用
         /*if (couponVo != null && couponVo.getCoupon_status() == 1) {
             couponVo.setCoupon_status(2);
             apiCouponMapper.updateUserCoupon(couponVo);
         }*/
 
-        return resultObj;
+        return ServiceResultHelper.genResultWithSuccess(orderMap);
     }
 }
 
