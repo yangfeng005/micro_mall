@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 应用对象 - Category.
@@ -27,6 +28,20 @@ public final class CategoryAO extends Category implements Serializable {
      * 父类名称
      */
     private String parentName;
+
+    /**
+     * 子类
+     */
+    private List<CategoryAO> subCategoryList;
+
+
+    public List<CategoryAO> getSubCategoryList() {
+        return subCategoryList;
+    }
+
+    public void setSubCategoryList(List<CategoryAO> subCategoryList) {
+        this.subCategoryList = subCategoryList;
+    }
 
     public String getParentName() {
         return parentName;
