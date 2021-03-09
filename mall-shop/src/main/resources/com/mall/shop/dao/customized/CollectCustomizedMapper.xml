@@ -21,9 +21,13 @@
   <select id="listByCondition" parameterType="com.mall.shop.dto.request.CollectRequest"
           resultMap="CustomResultMap">
     SELECT
-          *
-    FROM
-         collect
+         c.*,
+         g.name,
+         g.list_pic_url as listPicUrl,
+         g.goods_brief as goodsBrief,
+         g.retail_price as retailPrice
+    FROM collect c
+    LEFT JOIN goods g on c.value_id = g.id
     <where>
         <if test="userId != null and userId != ''">
             and user_id = #{userId, jdbcType=VARCHAR}
