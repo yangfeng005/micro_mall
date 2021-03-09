@@ -13,6 +13,9 @@ public class GoodsRequest extends BaseRequest implements Serializable {
 
     private String name;
 
+    /**
+     * 品牌id
+     */
     private String brandId;
 
     private String categoryId;
@@ -29,10 +32,18 @@ public class GoodsRequest extends BaseRequest implements Serializable {
 
     private List<String> goodsIds;
 
+    /**
+     * 排序
+     */
     private String order;
 
     /**
      * 排除的商品id
      */
     private String excludeGoodsId;
+
+    /**
+     * 关键字
+     */
+    private String keyword;
 }

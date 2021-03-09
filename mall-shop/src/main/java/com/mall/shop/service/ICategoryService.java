@@ -38,4 +38,14 @@ public interface ICategoryService extends IBaseAOService<CategoryAO, CategoryCri
 
     ServiceResult<List<CategoryAO>> listByContidion(CategoryRequest request);
 
+
+    /**
+     * 获取当前分类及其左右子分类
+     *
+     * @param categoryId
+     * @return
+     */
+    ServiceResult<List<CategoryAO>> listAllChildrenAndSelf(String categoryId);
+
+
 }

@@ -133,5 +133,34 @@ public class CategoryService extends AbstractBaseAOService<CategoryAO, CategoryC
     public ServiceResult<List<CategoryAO>> listByContidion(CategoryRequest request) {
         return ServiceResultHelper.genResultWithSuccess(categoryCustomizedMapper.list(request));
     }
+
+
+    /**
+     * 获取当前分类及其左右子分类
+     *
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public ServiceResult<List<CategoryAO>> listAllChildrenAndSelf(String categoryId) {
+        List<CategoryAO> categoryList = categoryCustomizedMapper.list(null);
+        if (!CollectionUtils.isEmpty(categoryList)) {
+            CategoryAO parent = null;
+            for (CategoryAO category : categoryList) {
+                if (category.getId().equals(categoryId)) {
+                    parent = category;
+                    break;
+                }
+            }
+            //递归获取所有子节点
+            if (parent != null) {
+                List<CategoryAO> childNodes = new ArrayList<>();
+                TreeUtil.getAllChildNodes(parent, categoryList, childNodes);
+                childNodes.add(parent);
+                return ServiceResultHelper.genResultWithSuccess(childNodes);
+            }
+        }
+        return ServiceResultHelper.genResultWithSuccess();
+    }
 }
 
